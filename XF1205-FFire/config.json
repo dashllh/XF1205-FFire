@@ -1,0 +1,6 @@
+{
+  "apparatus": {
+    "port": "COM1",
+    "port2": "COM2"
+  }
+}

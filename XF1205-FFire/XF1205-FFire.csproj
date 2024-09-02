@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="DevExpress.Document.Processor" Version="22.2.4" />
+    <PackageReference Include="FluentModbus" Version="5.2.0" />
     <PackageReference Include="WinForms.DataVisualization" Version="1.9.2" />
   </ItemGroup>
 

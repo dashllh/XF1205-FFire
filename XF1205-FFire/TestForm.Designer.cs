@@ -75,7 +75,7 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(24, 19);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(120, 75);
+            groupBox1.Size = new Size(105, 75);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
@@ -87,7 +87,7 @@
             lblTimer.ForeColor = Color.Yellow;
             lblTimer.Location = new Point(3, 30);
             lblTimer.Name = "lblTimer";
-            lblTimer.Size = new Size(114, 42);
+            lblTimer.Size = new Size(99, 42);
             lblTimer.TabIndex = 1;
             lblTimer.Text = "8888";
             lblTimer.TextAlign = ContentAlignment.MiddleCenter;
@@ -107,7 +107,7 @@
             groupBox2.Controls.Add(label3);
             groupBox2.Location = new Point(24, 100);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(120, 75);
+            groupBox2.Size = new Size(105, 75);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             // 
@@ -119,7 +119,7 @@
             lblOilTemperature.ForeColor = Color.Yellow;
             lblOilTemperature.Location = new Point(3, 30);
             lblOilTemperature.Name = "lblOilTemperature";
-            lblOilTemperature.Size = new Size(114, 42);
+            lblOilTemperature.Size = new Size(99, 42);
             lblOilTemperature.TabIndex = 1;
             lblOilTemperature.Text = "8888";
             lblOilTemperature.TextAlign = ContentAlignment.MiddleCenter;
@@ -296,19 +296,21 @@
             // 
             btnStartTest.Location = new Point(24, 193);
             btnStartTest.Name = "btnStartTest";
-            btnStartTest.Size = new Size(120, 34);
+            btnStartTest.Size = new Size(105, 34);
             btnStartTest.TabIndex = 15;
             btnStartTest.Text = "开始计时";
             btnStartTest.UseVisualStyleBackColor = true;
+            btnStartTest.Click += btnStartTest_Click;
             // 
             // btnStopTest
             // 
             btnStopTest.Location = new Point(24, 243);
             btnStopTest.Name = "btnStopTest";
-            btnStopTest.Size = new Size(120, 34);
+            btnStopTest.Size = new Size(105, 34);
             btnStopTest.TabIndex = 16;
             btnStopTest.Text = "停止计时";
             btnStopTest.UseVisualStyleBackColor = true;
+            btnStopTest.Click += btnStopTest_Click;
             // 
             // chartOilTemp
             // 
@@ -339,7 +341,7 @@
             chartArea1.AxisY.MinorTickMark.LineColor = Color.LightGray;
             chartArea1.AxisY.Title = "油温(℃)";
             chartArea1.AxisY.TitleFont = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            chartArea1.AxisY.TitleForeColor = Color.Gray;            
+            chartArea1.AxisY.TitleForeColor = Color.Gray;
             chartArea1.BackColor = Color.Black;
             chartArea1.BorderColor = Color.Transparent;
             chartArea1.Name = "ChartArea1";
@@ -351,19 +353,19 @@
             legend1.TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Wide;
             legend1.TitleForeColor = Color.Transparent;
             chartOilTemp.Legends.Add(legend1);
-            chartOilTemp.Location = new Point(171, 29);
+            chartOilTemp.Location = new Point(149, 29);
             chartOilTemp.Name = "chartOilTemp";
-            series1.Name = "Series1";
+            series1.BorderColor = Color.Transparent;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.BorderColor = Color.Transparent;
             series1.Color = Color.Red;
             series1.Legend = "legendOilTemp";
             series1.LegendText = "油温";
+            series1.Name = "Series1";
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
-            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;            
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             chartOilTemp.Series.Add(series1);
-            chartOilTemp.Size = new Size(672, 348);
+            chartOilTemp.Size = new Size(694, 348);
             chartOilTemp.TabIndex = 17;
             chartOilTemp.Text = "chart1";
             // 
@@ -371,19 +373,21 @@
             // 
             btnOpenValve.Location = new Point(24, 293);
             btnOpenValve.Name = "btnOpenValve";
-            btnOpenValve.Size = new Size(120, 34);
+            btnOpenValve.Size = new Size(105, 34);
             btnOpenValve.TabIndex = 18;
             btnOpenValve.Text = "打开燃气阀";
             btnOpenValve.UseVisualStyleBackColor = true;
+            btnOpenValve.Click += btnOpenValve_Click;
             // 
             // btnCloseValve
             // 
             btnCloseValve.Location = new Point(24, 343);
             btnCloseValve.Name = "btnCloseValve";
-            btnCloseValve.Size = new Size(120, 34);
+            btnCloseValve.Size = new Size(105, 34);
             btnCloseValve.TabIndex = 19;
             btnCloseValve.Text = "关闭燃气阀";
             btnCloseValve.UseVisualStyleBackColor = true;
+            btnCloseValve.Click += btnCloseValve_Click;
             // 
             // btnGenerateReport
             // 
@@ -425,6 +429,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "样品试验";
             TopMost = true;
+            Load += TestForm_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
