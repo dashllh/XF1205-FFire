@@ -17,6 +17,8 @@ namespace XF1205_FFire
         private SensorData _sensorData;
         // 传感器原始数据缓存
         private List<SensorData> _sensorDataBuffer;
+        // 样品数据模型
+        private DataModel _dataModel;
         // 样品试验视图窗体对象
         private TestForm? _view;
         // 视图显示模型
@@ -28,6 +30,7 @@ namespace XF1205_FFire
             _sensorData = new SensorData();
             _sensorDataBuffer = new List<SensorData>();
             _viewModel = new();
+            _dataModel = new();
         }
 
         public void BindView(TestForm view)
@@ -85,14 +88,19 @@ namespace XF1205_FFire
 
         public void Stop()
         {
-            _timer.Change(0, Timeout.Infinite);
+            _timer.Change(0, Timeout.Infinite);           
+            
+        }
+
+        public void OutputTestData()
+        {
+            /* 创建本地存储目录 */
+            //string prodpath = $"D:\\ISO11820\\{_testmaster.Productid}";
+            //string smppath = $"{prodpath}\\{_testmaster.Testid}";
+            //string datapath = $"{smppath}\\data";
+            //string rptpath = $"{smppath}\\report";
             // 重置试验控制变量
             _counter = 0;
         }
-
-        // 判断初始试验条件
-
-        // 判断试验终止条件
-
     }
 }

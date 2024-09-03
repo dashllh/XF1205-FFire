@@ -397,6 +397,7 @@
             btnGenerateReport.TabIndex = 20;
             btnGenerateReport.Text = "生成试验报告";
             btnGenerateReport.UseVisualStyleBackColor = true;
+            btnGenerateReport.Click += btnGenerateReport_Click;
             // 
             // btnCloseWindow
             // 

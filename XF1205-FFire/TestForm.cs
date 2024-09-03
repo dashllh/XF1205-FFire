@@ -34,39 +34,39 @@ namespace XF1205_FFire
 
         private void btnStopTest_Click(object sender, EventArgs e)
         {
-            if(DialogResult.Yes == MessageBox.Show("确定停止本次试验吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            if (DialogResult.Yes == MessageBox.Show("确定停止本次试验吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 recorder.Stop();
                 // 重置试验界面显示
                 ResetDisplay();
-            }                
+            }
         }
 
         private void btnOpenValve_Click(object sender, EventArgs e)
         {
             var apparatus = AppData.Data?["Apparatus"] as ApparatusOperator;
             bool? ret = apparatus?.SetValveStatus(1).Item1;
-            if(ret.HasValue && ret == true)
+            if (ret.HasValue && ret == true)
             {
                 btnOpenValve.Enabled = false;
                 btnCloseValve.Enabled = true;
-            }            
+            }
         }
 
         private void btnCloseValve_Click(object sender, EventArgs e)
         {
-            var apparatus = AppData.Data?["Apparatus"] as ApparatusOperator;            
+            var apparatus = AppData.Data?["Apparatus"] as ApparatusOperator;
             bool? ret = apparatus?.SetValveStatus(0).Item1;
             if (ret.HasValue && ret == true)
             {
                 btnOpenValve.Enabled = true;
                 btnCloseValve.Enabled = false;
-            }            
+            }
         }
 
         private void TestForm_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         public void UpdateDisplay(TestViewModel model)
@@ -83,7 +83,7 @@ namespace XF1205_FFire
                         chartOilTemp.ChartAreas[0].AxisX.Minimum = model.Counter - 300;
                         chartOilTemp.ChartAreas[0].AxisX.Maximum = model.Counter;
                     }
-                    
+
                 }));
             }
             catch (InvalidOperationException)
@@ -97,6 +97,11 @@ namespace XF1205_FFire
             lblTimer.Text = "0";
             lblOilTemperature.Text = "8888";
             chartOilTemp.Series[0].Points.Clear();
+        }
+
+        private void btnGenerateReport_Click(object sender, EventArgs e)
+        {
+            recorder.OutputTestData();
         }
     }
 }
