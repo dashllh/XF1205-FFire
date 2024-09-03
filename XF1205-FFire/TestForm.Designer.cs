@@ -304,6 +304,7 @@
             // 
             // btnStopTest
             // 
+            btnStopTest.Enabled = false;
             btnStopTest.Location = new Point(24, 243);
             btnStopTest.Name = "btnStopTest";
             btnStopTest.Size = new Size(105, 34);
@@ -381,6 +382,7 @@
             // 
             // btnCloseValve
             // 
+            btnCloseValve.Enabled = false;
             btnCloseValve.Location = new Point(24, 343);
             btnCloseValve.Name = "btnCloseValve";
             btnCloseValve.Size = new Size(105, 34);

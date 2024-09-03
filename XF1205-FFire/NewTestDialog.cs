@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+﻿
 namespace XF1205_FFire
 {
     public partial class NewTestDialog : Form
@@ -27,6 +18,16 @@ namespace XF1205_FFire
             Close();
             Form frmTestForm = new TestForm();
             frmTestForm.Show();
+        }
+
+        private void NewTestDialog_Load(object sender, EventArgs e)
+        {
+            var dataModel = AppData.Data?["TestData"] as DataModel;
+            if(dataModel != null)
+            {
+                txtLabTemp.Text = dataModel.LabTemperature.ToString();
+                txtLabHumidity.Text = dataModel.Humidity.ToString();
+            }            
         }
     }
 }

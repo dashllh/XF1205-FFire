@@ -22,7 +22,7 @@ namespace XF1205_FFire
 
         private ushort _oilTemp;   // 当前油温热电偶的温度(单位:0.1)
 
-        private int _valveStatus;     // 燃气电磁阀当前状态(0:关闭状态 | 1:开启状态)
+        private int _valveStatus;  // 燃气电磁阀当前状态(0:关闭状态 | 1:开启状态)
 
         public ushort OilTemperature 
         {

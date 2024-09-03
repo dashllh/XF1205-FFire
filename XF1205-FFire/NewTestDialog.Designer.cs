@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             btnConfirm = new Button();
             btnCancel = new Button();
             label1 = new Label();
             txtSampleId = new TextBox();
+            dataModelBindingSource = new BindingSource(components);
             label2 = new Label();
             txtTestId = new TextBox();
             label3 = new Label();
@@ -63,11 +65,16 @@
             btnClearInput = new Button();
             groupBox5 = new GroupBox();
             textBox1 = new TextBox();
+            dataModelBindingSource1 = new BindingSource(components);
+            dataModelBindingSource2 = new BindingSource(components);
+            ((System.ComponentModel.ISupportInitialize)dataModelBindingSource).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataModelBindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataModelBindingSource2).BeginInit();
             SuspendLayout();
             // 
             // btnConfirm
@@ -103,10 +110,15 @@
             // 
             // txtSampleId
             // 
+            txtSampleId.DataBindings.Add(new Binding("Text", dataModelBindingSource, "SampleId", true));
             txtSampleId.Location = new Point(84, 59);
             txtSampleId.Name = "txtSampleId";
             txtSampleId.Size = new Size(108, 23);
             txtSampleId.TabIndex = 3;
+            // 
+            // dataModelBindingSource
+            // 
+            dataModelBindingSource.DataSource = typeof(DataModel);
             // 
             // label2
             // 
@@ -119,6 +131,7 @@
             // 
             // txtTestId
             // 
+            txtTestId.DataBindings.Add(new Binding("Text", dataModelBindingSource, "TestId", true));
             txtTestId.Location = new Point(304, 59);
             txtTestId.Name = "txtTestId";
             txtTestId.Size = new Size(106, 23);
@@ -135,6 +148,7 @@
             // 
             // txtProductName
             // 
+            txtProductName.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ProductName", true));
             txtProductName.Location = new Point(84, 22);
             txtProductName.Name = "txtProductName";
             txtProductName.Size = new Size(326, 23);
@@ -155,17 +169,21 @@
             // 
             // txtLabHumidity
             // 
+            txtLabHumidity.DataBindings.Add(new Binding("Text", dataModelBindingSource, "Humidity", true));
             txtLabHumidity.Location = new Point(337, 32);
             txtLabHumidity.Name = "txtLabHumidity";
             txtLabHumidity.Size = new Size(73, 23);
             txtLabHumidity.TabIndex = 12;
+            txtLabHumidity.TextAlign = HorizontalAlignment.Center;
             // 
             // txtLabTemp
             // 
+            txtLabTemp.DataBindings.Add(new Binding("Text", dataModelBindingSource, "LabTemperature", true));
             txtLabTemp.Location = new Point(118, 32);
             txtLabTemp.Name = "txtLabTemp";
             txtLabTemp.Size = new Size(74, 23);
             txtLabTemp.TabIndex = 11;
+            txtLabTemp.TextAlign = HorizontalAlignment.Center;
             // 
             // label5
             // 
@@ -204,6 +222,7 @@
             // 
             // txtSamplePrepareTime
             // 
+            txtSamplePrepareTime.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ProductPrepareTime", true));
             txtSamplePrepareTime.Location = new Point(84, 96);
             txtSamplePrepareTime.Name = "txtSamplePrepareTime";
             txtSamplePrepareTime.Size = new Size(326, 23);
@@ -237,6 +256,7 @@
             // 
             // txtOperator
             // 
+            txtOperator.DataBindings.Add(new Binding("Text", dataModelBindingSource, "Operator", true));
             txtOperator.Location = new Point(292, 68);
             txtOperator.Name = "txtOperator";
             txtOperator.Size = new Size(118, 23);
@@ -253,6 +273,7 @@
             // 
             // txtTestDate
             // 
+            txtTestDate.DataBindings.Add(new Binding("Text", dataModelBindingSource, "TestDate", true));
             txtTestDate.Location = new Point(292, 30);
             txtTestDate.Name = "txtTestDate";
             txtTestDate.Size = new Size(118, 23);
@@ -269,6 +290,7 @@
             // 
             // txtTestAccord
             // 
+            txtTestAccord.DataBindings.Add(new Binding("Text", dataModelBindingSource, "TestAccord", true));
             txtTestAccord.Location = new Point(84, 67);
             txtTestAccord.Name = "txtTestAccord";
             txtTestAccord.Size = new Size(118, 23);
@@ -285,6 +307,7 @@
             // 
             // txtRptId
             // 
+            txtRptId.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ReportId", true));
             txtRptId.Location = new Point(84, 30);
             txtRptId.Name = "txtRptId";
             txtRptId.Size = new Size(118, 23);
@@ -316,6 +339,7 @@
             // 
             // txtApparatusCheckDate
             // 
+            txtApparatusCheckDate.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ApparatusCheckDate", true));
             txtApparatusCheckDate.Location = new Point(84, 66);
             txtApparatusCheckDate.Name = "txtApparatusCheckDate";
             txtApparatusCheckDate.Size = new Size(326, 23);
@@ -332,6 +356,7 @@
             // 
             // txtApparatusId
             // 
+            txtApparatusId.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ApparatusId", true));
             txtApparatusId.Location = new Point(325, 30);
             txtApparatusId.Name = "txtApparatusId";
             txtApparatusId.Size = new Size(85, 23);
@@ -348,6 +373,7 @@
             // 
             // txtApparatusName
             // 
+            txtApparatusName.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ApparatusName", true));
             txtApparatusName.Location = new Point(84, 30);
             txtApparatusName.Name = "txtApparatusName";
             txtApparatusName.Size = new Size(170, 23);
@@ -384,10 +410,19 @@
             // 
             // textBox1
             // 
+            textBox1.DataBindings.Add(new Binding("Text", dataModelBindingSource, "Memo", true));
             textBox1.Location = new Point(19, 22);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(389, 23);
             textBox1.TabIndex = 0;
+            // 
+            // dataModelBindingSource1
+            // 
+            dataModelBindingSource1.DataSource = typeof(DataModel);
+            // 
+            // dataModelBindingSource2
+            // 
+            dataModelBindingSource2.DataSource = typeof(DataModel);
             // 
             // NewTestDialog
             // 
@@ -409,6 +444,8 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "新建试验";
             TopMost = true;
+            Load += NewTestDialog_Load;
+            ((System.ComponentModel.ISupportInitialize)dataModelBindingSource).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -419,6 +456,8 @@
             groupBox4.PerformLayout();
             groupBox5.ResumeLayout(false);
             groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataModelBindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataModelBindingSource2).EndInit();
             ResumeLayout(false);
         }
 
@@ -459,5 +498,8 @@
         private Button btnClearInput;
         private GroupBox groupBox5;
         private TextBox textBox1;
+        private BindingSource dataModelBindingSource;
+        private BindingSource dataModelBindingSource1;
+        private BindingSource dataModelBindingSource2;
     }
 }

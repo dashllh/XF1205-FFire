@@ -14,7 +14,7 @@
             var _apparatus = AppData.Data?["Apparatus"] as ApparatusOperator;
             if (_sensorData != null && _apparatus != null)
             {
-                _sensorData.OilTemperature = _apparatus.GetOilTemperature();
+                _sensorData.OilTemperature = _apparatus.GetOilTemperature() / 10.0;
             }
         }
 

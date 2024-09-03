@@ -48,7 +48,7 @@ namespace XF1205_FFire
             var sensorData = AppData.Data?["SensorData"] as SensorData;
             if (sensorData is not null)
             {
-                _viewModel.SensorData.OilTemperature = _sensorData.OilTemperature;
+                _viewModel.SensorData.OilTemperature = sensorData.OilTemperature;
             }
 
             return true;
