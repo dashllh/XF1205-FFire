@@ -43,7 +43,6 @@ namespace XF1205_FFire
 
     // 应用程序全局存储
     static class AppData
-    {
-        public static Dictionary<string, object>? Data { get; set; }
+    {        public static Dictionary<string, object>? Data { get; set; }
     }
 }

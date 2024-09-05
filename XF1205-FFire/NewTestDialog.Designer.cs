@@ -64,7 +64,7 @@
             label7 = new Label();
             btnClearInput = new Button();
             groupBox5 = new GroupBox();
-            textBox1 = new TextBox();
+            txtTestMemo = new TextBox();
             dataModelBindingSource1 = new BindingSource(components);
             dataModelBindingSource2 = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dataModelBindingSource).BeginInit();
@@ -83,7 +83,7 @@
             btnConfirm.Location = new Point(267, 556);
             btnConfirm.Name = "btnConfirm";
             btnConfirm.Size = new Size(82, 34);
-            btnConfirm.TabIndex = 0;
+            btnConfirm.TabIndex = 14;
             btnConfirm.Text = "确定";
             btnConfirm.UseVisualStyleBackColor = true;
             btnConfirm.Click += btnConfirm_Click;
@@ -94,7 +94,7 @@
             btnCancel.Location = new Point(355, 556);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(82, 34);
-            btnCancel.TabIndex = 1;
+            btnCancel.TabIndex = 15;
             btnCancel.Text = "取消";
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
@@ -115,6 +115,7 @@
             txtSampleId.Name = "txtSampleId";
             txtSampleId.Size = new Size(108, 23);
             txtSampleId.TabIndex = 3;
+            txtSampleId.Leave += txtSampleId_Leave;
             // 
             // dataModelBindingSource
             // 
@@ -135,7 +136,7 @@
             txtTestId.Location = new Point(304, 59);
             txtTestId.Name = "txtTestId";
             txtTestId.Size = new Size(106, 23);
-            txtTestId.TabIndex = 5;
+            txtTestId.TabIndex = 4;
             // 
             // label3
             // 
@@ -152,7 +153,7 @@
             txtProductName.Location = new Point(84, 22);
             txtProductName.Name = "txtProductName";
             txtProductName.Size = new Size(326, 23);
-            txtProductName.TabIndex = 7;
+            txtProductName.TabIndex = 2;
             // 
             // groupBox1
             // 
@@ -173,7 +174,7 @@
             txtLabHumidity.Location = new Point(337, 32);
             txtLabHumidity.Name = "txtLabHumidity";
             txtLabHumidity.Size = new Size(73, 23);
-            txtLabHumidity.TabIndex = 12;
+            txtLabHumidity.TabIndex = 1;
             txtLabHumidity.TextAlign = HorizontalAlignment.Center;
             // 
             // txtLabTemp
@@ -182,7 +183,7 @@
             txtLabTemp.Location = new Point(118, 32);
             txtLabTemp.Name = "txtLabTemp";
             txtLabTemp.Size = new Size(74, 23);
-            txtLabTemp.TabIndex = 11;
+            txtLabTemp.TabIndex = 0;
             txtLabTemp.TextAlign = HorizontalAlignment.Center;
             // 
             // label5
@@ -226,7 +227,7 @@
             txtSamplePrepareTime.Location = new Point(84, 96);
             txtSamplePrepareTime.Name = "txtSamplePrepareTime";
             txtSamplePrepareTime.Size = new Size(326, 23);
-            txtSamplePrepareTime.TabIndex = 9;
+            txtSamplePrepareTime.TabIndex = 5;
             // 
             // label6
             // 
@@ -260,7 +261,7 @@
             txtOperator.Location = new Point(292, 68);
             txtOperator.Name = "txtOperator";
             txtOperator.Size = new Size(118, 23);
-            txtOperator.TabIndex = 14;
+            txtOperator.TabIndex = 9;
             // 
             // label13
             // 
@@ -277,7 +278,7 @@
             txtTestDate.Location = new Point(292, 30);
             txtTestDate.Name = "txtTestDate";
             txtTestDate.Size = new Size(118, 23);
-            txtTestDate.TabIndex = 12;
+            txtTestDate.TabIndex = 7;
             // 
             // label12
             // 
@@ -294,7 +295,7 @@
             txtTestAccord.Location = new Point(84, 67);
             txtTestAccord.Name = "txtTestAccord";
             txtTestAccord.Size = new Size(118, 23);
-            txtTestAccord.TabIndex = 10;
+            txtTestAccord.TabIndex = 8;
             // 
             // label11
             // 
@@ -311,7 +312,7 @@
             txtRptId.Location = new Point(84, 30);
             txtRptId.Name = "txtRptId";
             txtRptId.Size = new Size(118, 23);
-            txtRptId.TabIndex = 8;
+            txtRptId.TabIndex = 6;
             // 
             // label10
             // 
@@ -343,7 +344,7 @@
             txtApparatusCheckDate.Location = new Point(84, 66);
             txtApparatusCheckDate.Name = "txtApparatusCheckDate";
             txtApparatusCheckDate.Size = new Size(326, 23);
-            txtApparatusCheckDate.TabIndex = 10;
+            txtApparatusCheckDate.TabIndex = 12;
             // 
             // label9
             // 
@@ -360,7 +361,7 @@
             txtApparatusId.Location = new Point(325, 30);
             txtApparatusId.Name = "txtApparatusId";
             txtApparatusId.Size = new Size(85, 23);
-            txtApparatusId.TabIndex = 13;
+            txtApparatusId.TabIndex = 11;
             // 
             // label8
             // 
@@ -377,7 +378,7 @@
             txtApparatusName.Location = new Point(84, 30);
             txtApparatusName.Name = "txtApparatusName";
             txtApparatusName.Size = new Size(170, 23);
-            txtApparatusName.TabIndex = 11;
+            txtApparatusName.TabIndex = 10;
             // 
             // label7
             // 
@@ -394,13 +395,14 @@
             btnClearInput.Location = new Point(12, 556);
             btnClearInput.Name = "btnClearInput";
             btnClearInput.Size = new Size(82, 34);
-            btnClearInput.TabIndex = 12;
+            btnClearInput.TabIndex = 16;
             btnClearInput.Text = "重置输入";
             btnClearInput.UseVisualStyleBackColor = true;
+            btnClearInput.Click += btnClearInput_Click;
             // 
             // groupBox5
             // 
-            groupBox5.Controls.Add(textBox1);
+            groupBox5.Controls.Add(txtTestMemo);
             groupBox5.Location = new Point(12, 485);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(425, 61);
@@ -408,13 +410,13 @@
             groupBox5.TabStop = false;
             groupBox5.Text = "备注";
             // 
-            // textBox1
+            // txtTestMemo
             // 
-            textBox1.DataBindings.Add(new Binding("Text", dataModelBindingSource, "Memo", true));
-            textBox1.Location = new Point(19, 22);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(389, 23);
-            textBox1.TabIndex = 0;
+            txtTestMemo.DataBindings.Add(new Binding("Text", dataModelBindingSource, "Memo", true));
+            txtTestMemo.Location = new Point(19, 22);
+            txtTestMemo.Name = "txtTestMemo";
+            txtTestMemo.Size = new Size(389, 23);
+            txtTestMemo.TabIndex = 13;
             // 
             // dataModelBindingSource1
             // 
@@ -497,7 +499,7 @@
         private Label label10;
         private Button btnClearInput;
         private GroupBox groupBox5;
-        private TextBox textBox1;
+        private TextBox txtTestMemo;
         private BindingSource dataModelBindingSource;
         private BindingSource dataModelBindingSource1;
         private BindingSource dataModelBindingSource2;

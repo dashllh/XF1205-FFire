@@ -10,7 +10,7 @@ namespace XF1205_FFire
             InitializeComponent();
             recorder = new TestDataRecorder();
             recorder.BindView(this);
-            apparatusOperator = new ApparatusOperator();
+            apparatusOperator = AppData.Data?["Apparatus"] as ApparatusOperator ?? new ApparatusOperator();
         }
 
         private void btnCloseWindow_Click(object sender, EventArgs e)
@@ -21,6 +21,8 @@ namespace XF1205_FFire
         private void btnStartTest_Click(object sender, EventArgs e)
         {
             recorder.Start();
+            btnStartTest.Enabled = false;
+            btnStopTest.Enabled = true;
         }
 
         private void btnStopTest_Click(object sender, EventArgs e)
@@ -30,6 +32,8 @@ namespace XF1205_FFire
                 recorder.Stop();
                 // 重置试验界面显示
                 ResetDisplay();
+                btnStartTest.Enabled = true;
+                btnStopTest.Enabled = false;
             }
         }
 
