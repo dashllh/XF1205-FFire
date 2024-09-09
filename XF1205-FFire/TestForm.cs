@@ -99,7 +99,6 @@ namespace XF1205_FFire
         {
             var progress = new ProgressForm();
             progress.Show();
-            Thread.Sleep(100);
             recorder.OutputTestData();
             progress.Close();
         }

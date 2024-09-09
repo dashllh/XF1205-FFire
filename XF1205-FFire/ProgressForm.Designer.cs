@@ -34,7 +34,7 @@
             // lblTip
             // 
             lblTip.AutoSize = true;
-            lblTip.Location = new Point(100, 39);
+            lblTip.Location = new Point(98, 38);
             lblTip.Name = "lblTip";
             lblTip.Size = new Size(170, 17);
             lblTip.TabIndex = 0;
