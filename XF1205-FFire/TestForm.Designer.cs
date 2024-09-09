@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             groupBox1 = new GroupBox();
             lblTimer = new Label();
             label1 = new Label();
@@ -170,6 +170,7 @@
             rdoNG3.TabStop = true;
             rdoNG3.Text = "不符合要求，补充说明:";
             rdoNG3.UseVisualStyleBackColor = true;
+            rdoNG3.CheckedChanged += rdoNG3_CheckedChanged;
             // 
             // rdoOK3
             // 
@@ -181,6 +182,7 @@
             rdoOK3.TabStop = true;
             rdoOK3.Text = "符合要求";
             rdoOK3.UseVisualStyleBackColor = true;
+            rdoOK3.CheckedChanged += rdoOK3_CheckedChanged;
             // 
             // panel2
             // 
@@ -201,6 +203,7 @@
             rdoNG2.TabStop = true;
             rdoNG2.Text = "不符合要求，补充说明:";
             rdoNG2.UseVisualStyleBackColor = true;
+            rdoNG2.CheckedChanged += rdoNG2_CheckedChanged;
             // 
             // rdoOK2
             // 
@@ -212,6 +215,7 @@
             rdoOK2.TabStop = true;
             rdoOK2.Text = "符合要求";
             rdoOK2.UseVisualStyleBackColor = true;
+            rdoOK2.CheckedChanged += rdoOK2_CheckedChanged;
             // 
             // panel1
             // 
@@ -232,6 +236,7 @@
             rdoNG1.TabStop = true;
             rdoNG1.Text = "不符合要求，补充说明:";
             rdoNG1.UseVisualStyleBackColor = true;
+            rdoNG1.CheckedChanged += rdoNG1_CheckedChanged;
             // 
             // rdoOK1
             // 
@@ -243,6 +248,7 @@
             rdoOK1.TabStop = true;
             rdoOK1.Text = "符合要求";
             rdoOK1.UseVisualStyleBackColor = true;
+            rdoOK1.CheckedChanged += rdoOK1_CheckedChanged;
             // 
             // txtNGReason3
             // 
@@ -250,6 +256,7 @@
             txtNGReason3.Name = "txtNGReason3";
             txtNGReason3.Size = new Size(144, 23);
             txtNGReason3.TabIndex = 11;
+            txtNGReason3.Leave += txtNGReason3_Leave;
             // 
             // txtNGReason2
             // 
@@ -257,6 +264,7 @@
             txtNGReason2.Name = "txtNGReason2";
             txtNGReason2.Size = new Size(144, 23);
             txtNGReason2.TabIndex = 10;
+            txtNGReason2.Leave += txtNGReason2_Leave;
             // 
             // txtNGReason1
             // 
@@ -264,6 +272,7 @@
             txtNGReason1.Name = "txtNGReason1";
             txtNGReason1.Size = new Size(144, 23);
             txtNGReason1.TabIndex = 9;
+            txtNGReason1.Leave += txtNGReason1_Leave;
             // 
             // label16
             // 
@@ -315,57 +324,57 @@
             // 
             // chartOilTemp
             // 
-            chartArea1.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal;
-            chartArea1.AlignmentStyle = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentStyles.Position;
-            chartArea1.Area3DStyle.LightStyle = System.Windows.Forms.DataVisualization.Charting.LightStyle.None;
-            chartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.True;
-            chartArea1.AxisX.Interval = 60D;
-            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            chartArea1.AxisX.LabelStyle.ForeColor = Color.Gray;
-            chartArea1.AxisX.LineColor = Color.LightGray;
-            chartArea1.AxisX.MajorGrid.Enabled = false;
-            chartArea1.AxisX.MajorGrid.LineColor = Color.LightGray;
-            chartArea1.AxisX.MajorTickMark.LineColor = Color.Gray;
-            chartArea1.AxisX.Maximum = 300D;
-            chartArea1.AxisX.Minimum = 0D;
-            chartArea1.AxisX.MinorTickMark.LineColor = Color.Gray;
-            chartArea1.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.True;
-            chartArea1.AxisY.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
-            chartArea1.AxisY.LabelStyle.ForeColor = Color.Gray;
-            chartArea1.AxisY.LineColor = Color.Transparent;
-            chartArea1.AxisY.MajorGrid.Enabled = false;
-            chartArea1.AxisY.MajorGrid.LineColor = Color.LightGray;
-            chartArea1.AxisY.MajorTickMark.LineColor = Color.LightGray;
-            chartArea1.AxisY.Minimum = 0D;
-            chartArea1.AxisY.MinorGrid.LineColor = Color.LightGray;
-            chartArea1.AxisY.MinorTickMark.LineColor = Color.LightGray;
-            chartArea1.AxisY.Title = "油温(℃)";
-            chartArea1.AxisY.TitleFont = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            chartArea1.AxisY.TitleForeColor = Color.Gray;
-            chartArea1.BackColor = Color.Black;
-            chartArea1.BorderColor = Color.Transparent;
-            chartArea1.Name = "ChartArea1";
-            chartOilTemp.ChartAreas.Add(chartArea1);
-            legend1.BackColor = Color.Transparent;
-            legend1.DockedToChartArea = "ChartArea1";
-            legend1.ForeColor = Color.Gray;
-            legend1.Name = "legendOilTemp";
-            legend1.TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Wide;
-            legend1.TitleForeColor = Color.Transparent;
-            chartOilTemp.Legends.Add(legend1);
+            chartArea2.AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal;
+            chartArea2.AlignmentStyle = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentStyles.Position;
+            chartArea2.Area3DStyle.LightStyle = System.Windows.Forms.DataVisualization.Charting.LightStyle.None;
+            chartArea2.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.True;
+            chartArea2.AxisX.Interval = 60D;
+            chartArea2.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea2.AxisX.LabelStyle.ForeColor = Color.Gray;
+            chartArea2.AxisX.LineColor = Color.LightGray;
+            chartArea2.AxisX.MajorGrid.Enabled = false;
+            chartArea2.AxisX.MajorGrid.LineColor = Color.LightGray;
+            chartArea2.AxisX.MajorTickMark.LineColor = Color.Gray;
+            chartArea2.AxisX.Maximum = 300D;
+            chartArea2.AxisX.Minimum = 0D;
+            chartArea2.AxisX.MinorTickMark.LineColor = Color.Gray;
+            chartArea2.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea2.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.True;
+            chartArea2.AxisY.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
+            chartArea2.AxisY.LabelStyle.ForeColor = Color.Gray;
+            chartArea2.AxisY.LineColor = Color.Transparent;
+            chartArea2.AxisY.MajorGrid.Enabled = false;
+            chartArea2.AxisY.MajorGrid.LineColor = Color.LightGray;
+            chartArea2.AxisY.MajorTickMark.LineColor = Color.LightGray;
+            chartArea2.AxisY.Minimum = 0D;
+            chartArea2.AxisY.MinorGrid.LineColor = Color.LightGray;
+            chartArea2.AxisY.MinorTickMark.LineColor = Color.LightGray;
+            chartArea2.AxisY.Title = "油温(℃)";
+            chartArea2.AxisY.TitleFont = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            chartArea2.AxisY.TitleForeColor = Color.Gray;
+            chartArea2.BackColor = Color.Black;
+            chartArea2.BorderColor = Color.Transparent;
+            chartArea2.Name = "ChartArea1";
+            chartOilTemp.ChartAreas.Add(chartArea2);
+            legend2.BackColor = Color.Transparent;
+            legend2.DockedToChartArea = "ChartArea1";
+            legend2.ForeColor = Color.Gray;
+            legend2.Name = "legendOilTemp";
+            legend2.TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Wide;
+            legend2.TitleForeColor = Color.Transparent;
+            chartOilTemp.Legends.Add(legend2);
             chartOilTemp.Location = new Point(149, 29);
             chartOilTemp.Name = "chartOilTemp";
-            series1.BorderColor = Color.Transparent;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Color = Color.Red;
-            series1.Legend = "legendOilTemp";
-            series1.LegendText = "油温";
-            series1.Name = "Series1";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
-            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            chartOilTemp.Series.Add(series1);
+            series2.BorderColor = Color.Transparent;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = Color.Red;
+            series2.Legend = "legendOilTemp";
+            series2.LegendText = "油温";
+            series2.Name = "Series1";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
+            series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            chartOilTemp.Series.Add(series2);
             chartOilTemp.Size = new Size(694, 348);
             chartOilTemp.TabIndex = 17;
             chartOilTemp.Text = "chart1";

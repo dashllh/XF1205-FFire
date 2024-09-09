@@ -22,6 +22,12 @@ namespace XF1205_FFire
         public string ApparatusName { get;set; } = string.Empty;
         public string ApparatusCheckDate { get; set; } = string.Empty;
         public string Memo {  get; set; } = string.Empty;
+        public bool Result1 { get; set; } = false;
+        public bool Result2 { get; set; } = false;
+        public bool Result3 { get; set; } = false;
+        public string NGReason1 {  get; set; } = string.Empty;
+        public string NGReason2 { get; set; } = string.Empty;
+        public string NGReason3 { get; set; } = string.Empty;
 
         public DataModel()
         {            

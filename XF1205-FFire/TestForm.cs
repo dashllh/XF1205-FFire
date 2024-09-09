@@ -1,4 +1,6 @@
 ﻿
+using DevExpress.XtraSpreadsheet.Model;
+
 namespace XF1205_FFire
 {
     public partial class TestForm : Form
@@ -95,7 +97,92 @@ namespace XF1205_FFire
 
         private void btnGenerateReport_Click(object sender, EventArgs e)
         {
+            var progress = new ProgressForm();
+            progress.Show();
+            Thread.Sleep(100);
             recorder.OutputTestData();
+            progress.Close();
+        }
+
+        private void rdoOK1_CheckedChanged(object sender, EventArgs e)
+        {
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null)
+            {
+                dataModel.Result1 = rdoOK1.Checked ? true : false;
+            }
+        }
+
+        private void rdoNG1_CheckedChanged(object sender, EventArgs e)
+        {
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null)
+            {
+                dataModel.Result1 = rdoNG1.Checked ? false : true;
+            }
+        }
+
+        private void rdoOK2_CheckedChanged(object sender, EventArgs e)
+        {
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null)
+            {
+                dataModel.Result2 = rdoOK2.Checked ? true : false;
+            }
+        }
+
+        private void rdoNG2_CheckedChanged(object sender, EventArgs e)
+        {
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null)
+            {
+                dataModel.Result2 = rdoNG2.Checked ? false : true;
+            }
+        }
+
+        private void rdoOK3_CheckedChanged(object sender, EventArgs e)
+        {
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null)
+            {
+                dataModel.Result3 = rdoOK3.Checked ? true : false;
+            }
+        }
+
+        private void rdoNG3_CheckedChanged(object sender, EventArgs e)
+        {
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null)
+            {
+                dataModel.Result3 = rdoNG3.Checked ? false : true;
+            }
+        }
+
+        private void txtNGReason1_Leave(object sender, EventArgs e)
+        {
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null) 
+            {
+                dataModel.NGReason1 = txtNGReason1.Text;
+            }
+        }
+
+        private void txtNGReason2_Leave(object sender, EventArgs e)
+        {
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null)
+            {
+                dataModel.NGReason2 = txtNGReason2.Text;
+            }
+        }
+
+        private void txtNGReason3_Leave(object sender, EventArgs e)
+        {
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null)
+            {
+                dataModel.NGReason3 = txtNGReason3.Text;
+            }
         }
     }
 }

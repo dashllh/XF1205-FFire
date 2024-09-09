@@ -14,6 +14,7 @@ using DevExpress.Spreadsheet;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraRichEdit.API.Native;
 using DevExpress.Office.Utils;
+using DevExpress.Data.Filtering;
 
 namespace XF1205_FFire
 {
@@ -102,7 +103,7 @@ namespace XF1205_FFire
             
         }
 
-        public async void OutputTestData()
+        public void OutputTestData()
         {
             _dataModel = AppData.Data?["TestData"] as DataModel;
             if(_dataModel == null)
@@ -135,7 +136,7 @@ namespace XF1205_FFire
                 using (var csvwriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
                     //写入数据内容
-                    await csvwriter.WriteRecordsAsync(_sensorDataBuffer);
+                    csvwriter.WriteRecords(_sensorDataBuffer);
                 }
 
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -151,11 +152,11 @@ namespace XF1205_FFire
                     ExcelWorksheet sheetRawData = excelPack.Workbook.Worksheets.Add("rawdata");
                     ExcelWorksheet sheetChart = excelPack.Workbook.Worksheets.Add("chart");
                     // 加载传感器温度原始数据
-                    await sheetRawData.Cells["A1"].LoadFromTextAsync(new FileInfo($"{datapath}\\sensordata.csv"), format, OfficeOpenXml.Table.TableStyles.Custom, true);
+                    sheetRawData.Cells["A1"].LoadFromText(new FileInfo($"{datapath}\\sensordata.csv"), format, OfficeOpenXml.Table.TableStyles.Custom, true);
                     // 创建温度图并设置显示属性
                     ExcelLineChart chart = sheetChart.Drawings.AddLineChart("temperature", eLineChartType.Line) as ExcelLineChart;
                     chart.SetPosition(0, 10, 0, 10);
-                    chart.SetSize(540, 200);
+                    chart.SetSize(550, 200);
                     chart.Legend.Remove();
 
                     var dataSource = sheetRawData.Cells[$"A2:A{_sensorDataBuffer.Count}"];
@@ -165,7 +166,7 @@ namespace XF1205_FFire
                 }
 
                 /* 使用DevExpress Office API打开报表文件，复制图标至ClipBorad */
-                using (DevExpress.Spreadsheet.Workbook workbook = new())
+                using (Workbook workbook = new())
                 {
                     // 加载报表文件
                     workbook.LoadDocument($"{datapath}\\chart.xlsx");
@@ -177,9 +178,46 @@ namespace XF1205_FFire
                         wordProcessor.LoadDocument(@"D:\\XF 1205-2014\\template.docx");
 
                         Document document = wordProcessor.Document;
-                        // 设置表格数据
+                        // 设置Word格式试验报表的表格数据
+                        /* 填充非表格化数据 */
+                        // 检验日期
+                        document.Replace(document.FindAll("[testdate]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.TestDate.ToString("yyyy年MM月dd日"));
+                        // 检验人员
+                        document.Replace(document.FindAll("[operator]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Operator);
+                        // 设置实验室湿度
+                        document.Replace(document.FindAll("[humidity]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Humidity.ToString());
+                        // 设置实验室温度
+                        document.Replace(document.FindAll("[labtemp]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.LabTemperature.ToString());
+                        // 设置报告编号
+                        document.Replace(document.FindAll("[rptno]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ReportId);
+                        // 产品名称 
+                        document.Replace(document.FindAll("[productname]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ProductName);
+                        // 样品编号
+                        document.Replace(document.FindAll("[sampleid]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.SampleId);
+                        // 试验编号(标识号)
+                        document.Replace(document.FindAll("[testid]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.TestId);
+                        // 检验依据
+                        document.Replace(document.FindAll("[testaccord]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.TestAccord);
+                        // 样品养护时间
+                        document.Replace(document.FindAll("[productpreparetime]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ProductPrepareTime);
+                        // 设备检定日期
+                        document.Replace(document.FindAll("[apparatuscheckdate]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ApparatusCheckDate);
+                        // 设备编号
+                        document.Replace(document.FindAll("[apparatusid]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ApparatusId);
+                        // 试验结论1
+                        document.Replace(document.FindAll("[result1]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result1 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason1 + ",不符合要求");
+                        // 试验结论2
+                        document.Replace(document.FindAll("[result2]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result2 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason2 + ",不符合要求");
+                        // 试验结论3
+                        document.Replace(document.FindAll("[result3]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result3 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason3 + ",不符合要求");
+                        // 试验备注
+                        document.Replace(document.FindAll("[memo]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Memo);
+
                         DevExpress.XtraRichEdit.API.Native.Table table = document.Tables[0];
                         table.BeginUpdate();
+                        // 填充报表中表格化数据项
+                        // ...
+                        // 插入温度曲线图
                         document.Images.Insert(table[10, 0].Range.Start, chartImg.NativeImage);
                         table.EndUpdate();
                         
@@ -189,8 +227,7 @@ namespace XF1205_FFire
                 MessageBox.Show("生成报告成功!","系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //FileStream stream = File.Create($"{datapath}\\chart.xlsx");
                 //stream.Close();
-                // 复制曲线图文件至Word报表文件
-                
+                // 复制曲线图文件至Word报表文件                
             }
             catch (Exception e)
             {
