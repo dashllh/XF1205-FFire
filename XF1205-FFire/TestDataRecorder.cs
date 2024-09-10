@@ -27,7 +27,7 @@ namespace XF1205_FFire
         // 数据采集计数器
         private int _counter;
         // 传感器最新数据
-        private SensorData _sensorData;
+        //private SensorData _sensorData;
         // 传感器原始数据缓存
         private List<SensorData> _sensorDataBuffer;
         // 样品数据模型
@@ -40,7 +40,7 @@ namespace XF1205_FFire
         {
             _timer = new(RecordData);
             _counter = 0;
-            _sensorData = new SensorData();
+            //_sensorData = new SensorData();
             _sensorDataBuffer = new List<SensorData>();
             _viewModel = new();
         }
@@ -60,6 +60,7 @@ namespace XF1205_FFire
             var sensorData = AppData.Data?["SensorData"] as SensorData;
             if (sensorData is not null)
             {
+                //_sensorData.OilTemperature = sensorData.OilTemperature;
                 _viewModel.SensorData.OilTemperature = sensorData.OilTemperature;
             }
 
@@ -80,7 +81,11 @@ namespace XF1205_FFire
                 return;
 
             // 保存传感器最新数据
-            _sensorDataBuffer.Add(_sensorData);
+            _sensorDataBuffer.Add(new SensorData
+            {
+                Timer = _counter,
+                OilTemperature = _viewModel.SensorData.OilTemperature
+            });
 
             // 计算实时数据
             DoCaculate();
@@ -114,7 +119,7 @@ namespace XF1205_FFire
             }
 
             /* 创建本地存储目录 */
-            string prodpath = $"D:\\XF 1205-2014\\{_dataModel.SampleId}";
+            string prodpath = $"D:\\XF 1205-2014 FFire\\{_dataModel.SampleId}";
             string smppath = $"{prodpath}\\{_dataModel.TestId}";
             string datapath = $"{smppath}\\data";
             string rptpath = $"{smppath}\\report";
@@ -132,7 +137,7 @@ namespace XF1205_FFire
                 Directory.CreateDirectory(rptpath);
 
                 /* 保存本次试验数据文件 */
-                //传感器采集数据
+                // 使用CsvHelper保存传感器采集数据
                 using (var writer = new StreamWriter($"{datapath}\\sensordata.csv", false))
                 using (var csvwriter = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
@@ -140,6 +145,7 @@ namespace XF1205_FFire
                     csvwriter.WriteRecords(_sensorDataBuffer);
                 }
 
+                // 使用EPPlus加载csv格式传感器数据
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 var format = new ExcelTextFormat()
                 {
@@ -147,51 +153,27 @@ namespace XF1205_FFire
                     EOL = "\r"    // 修改行尾结束符,默认为 "\r\n" ("\r"为回车符 "\n"为换行符);
                                   // 字符类型引用符 format.TextQualifier = '"';
                 };
-                using (ExcelPackage excelPack = new ExcelPackage())
-                {
-                    // 创建sheet
-                    ExcelWorksheet sheetRawData = excelPack.Workbook.Worksheets.Add("rawdata");
-                    ExcelWorksheet sheetChart = excelPack.Workbook.Worksheets.Add("chart");
+                using (ExcelPackage excelPack = new ExcelPackage(new FileInfo(@"D:\\XF 1205-2014 FFire\\chart_template.xlsx")))
+                {                    
                     // 加载传感器温度原始数据
-                    sheetRawData.Cells["A1"].LoadFromText(new FileInfo($"{datapath}\\sensordata.csv"), format, OfficeOpenXml.Table.TableStyles.Custom, true);
-                    
-                    /*  创建温度图并设置显示属性*/
-                    ExcelLineChart chart = sheetChart.Drawings.AddLineChart("temperature", eLineChartType.Line) as ExcelLineChart;
-                    // 图标大小及位置
-                    chart.SetPosition(0, 10, 0, 10);
-                    chart.SetSize(550, 200);
-                    //chart.UseSecondaryAxis = true;
-                    chart.Legend.Remove();
-                    // 设置坐标轴属性
-                    //chart.XAxis.DisplayUnit = 180.0;
-                    //chart.XAxis.MajorUnit = 180.0;    //坐标轴标签显示间隔
-                    //chart.XAxis.MaxValue = _sensorDataBuffer.Count;                    
-
-                    var dataSource = sheetRawData.Cells[$"A2:A{_sensorDataBuffer.Count}"];
-                    chart.Series.Add(dataSource);
+                    ExcelWorksheet chartSheet = excelPack.Workbook.Worksheets[0];
+                    chartSheet.Workbook.Worksheets[0].Cells["A1"].LoadFromText(new FileInfo($"{datapath}\\sensordata.csv"), format, OfficeOpenXml.Table.TableStyles.None, true);
 
                     excelPack.SaveAs($"{datapath}\\chart.xlsx");
                 }
 
-                /* 使用DevExpress Office API打开报表文件，复制图标至ClipBorad */
+                /* 使用DevExpress Office API生成图表并复制到Word报表中 */
                 using (Workbook workbook = new())
                 {
                     // 加载报表文件
                     workbook.LoadDocument($"{datapath}\\chart.xlsx");
-                    DevExpress.Spreadsheet.Worksheet worksheet = workbook.Worksheets[1];
-
-                    // 设置图表显示属性
-                    worksheet.Charts[0].PrimaryAxes[0].Scaling.AutoMax = false;
-                    worksheet.Charts[0].PrimaryAxes[0].Scaling.Max = _sensorDataBuffer.Count;
-                    worksheet.Charts[0].PrimaryAxes[0].Scaling.AutoMin = false;
-                    worksheet.Charts[0].PrimaryAxes[0].Scaling.Min = 0;
-                    worksheet.Charts[0].PrimaryAxes[0].MajorUnit = 120.0;
-
+                    DevExpress.Spreadsheet.Worksheet worksheet = workbook.Worksheets[0];
+                    // 以图片方式复制曲线图
                     OfficeImage chartImg = worksheet.Charts[0].GetImage();
 
                     using (var wordProcessor = new RichEditDocumentServer())
                     {
-                        wordProcessor.LoadDocument(@"D:\\XF 1205-2014\\template.docx");
+                        wordProcessor.LoadDocument(@"D:\\XF 1205-2014 FFire\\template.docx");
 
                         Document document = wordProcessor.Document;
                         // 设置Word格式试验报表的表格数据
@@ -229,11 +211,9 @@ namespace XF1205_FFire
                         // 试验备注
                         document.Replace(document.FindAll("[memo]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Memo);
 
+                        // 在表格中插入温度曲线图
                         DevExpress.XtraRichEdit.API.Native.Table table = document.Tables[0];
-                        table.BeginUpdate();
-                        // 填充报表中表格化数据项
-                        // ...
-                        // 插入温度曲线图
+                        table.BeginUpdate(); 
                         document.Images.Insert(table[10, 0].Range.Start, chartImg.NativeImage);
                         table.EndUpdate();
                         
