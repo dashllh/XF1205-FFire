@@ -15,6 +15,7 @@ using DevExpress.XtraRichEdit;
 using DevExpress.XtraRichEdit.API.Native;
 using DevExpress.Office.Utils;
 using DevExpress.Data.Filtering;
+using DevExpress.Spreadsheet.Charts;
 
 namespace XF1205_FFire
 {
@@ -153,11 +154,18 @@ namespace XF1205_FFire
                     ExcelWorksheet sheetChart = excelPack.Workbook.Worksheets.Add("chart");
                     // 加载传感器温度原始数据
                     sheetRawData.Cells["A1"].LoadFromText(new FileInfo($"{datapath}\\sensordata.csv"), format, OfficeOpenXml.Table.TableStyles.Custom, true);
-                    // 创建温度图并设置显示属性
+                    
+                    /*  创建温度图并设置显示属性*/
                     ExcelLineChart chart = sheetChart.Drawings.AddLineChart("temperature", eLineChartType.Line) as ExcelLineChart;
+                    // 图标大小及位置
                     chart.SetPosition(0, 10, 0, 10);
                     chart.SetSize(550, 200);
+                    //chart.UseSecondaryAxis = true;
                     chart.Legend.Remove();
+                    // 设置坐标轴属性
+                    //chart.XAxis.DisplayUnit = 180.0;
+                    //chart.XAxis.MajorUnit = 180.0;    //坐标轴标签显示间隔
+                    //chart.XAxis.MaxValue = _sensorDataBuffer.Count;                    
 
                     var dataSource = sheetRawData.Cells[$"A2:A{_sensorDataBuffer.Count}"];
                     chart.Series.Add(dataSource);
@@ -171,6 +179,14 @@ namespace XF1205_FFire
                     // 加载报表文件
                     workbook.LoadDocument($"{datapath}\\chart.xlsx");
                     DevExpress.Spreadsheet.Worksheet worksheet = workbook.Worksheets[1];
+
+                    // 设置图表显示属性
+                    worksheet.Charts[0].PrimaryAxes[0].Scaling.AutoMax = false;
+                    worksheet.Charts[0].PrimaryAxes[0].Scaling.Max = _sensorDataBuffer.Count;
+                    worksheet.Charts[0].PrimaryAxes[0].Scaling.AutoMin = false;
+                    worksheet.Charts[0].PrimaryAxes[0].Scaling.Min = 0;
+                    worksheet.Charts[0].PrimaryAxes[0].MajorUnit = 120.0;
+
                     OfficeImage chartImg = worksheet.Charts[0].GetImage();
 
                     using (var wordProcessor = new RichEditDocumentServer())

@@ -1,5 +1,6 @@
 ﻿
 using DevExpress.XtraSpreadsheet.Model;
+using System;
 
 namespace XF1205_FFire
 {
@@ -7,12 +8,16 @@ namespace XF1205_FFire
     {
         private TestDataRecorder recorder;
         private ApparatusOperator apparatusOperator;
+        private ProgressForm progress;
         public TestForm()
         {
             InitializeComponent();
             recorder = new TestDataRecorder();
             recorder.BindView(this);
             apparatusOperator = AppData.Data?["Apparatus"] as ApparatusOperator ?? new ApparatusOperator();
+            progress = new ProgressForm();            
+            //progress.Show();
+            //progress.Visible = false;
         }
 
         private void btnCloseWindow_Click(object sender, EventArgs e)
@@ -97,7 +102,6 @@ namespace XF1205_FFire
 
         private void btnGenerateReport_Click(object sender, EventArgs e)
         {
-            var progress = new ProgressForm();
             progress.Show();
             recorder.OutputTestData();
             progress.Close();

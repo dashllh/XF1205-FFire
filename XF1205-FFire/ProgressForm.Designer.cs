@@ -34,11 +34,13 @@
             // lblTip
             // 
             lblTip.AutoSize = true;
+            lblTip.FlatStyle = FlatStyle.Flat;
             lblTip.Location = new Point(98, 38);
             lblTip.Name = "lblTip";
-            lblTip.Size = new Size(170, 17);
+            lblTip.Size = new Size(171, 20);
             lblTip.TabIndex = 0;
             lblTip.Text = "正在生成试验报表，请稍等......";
+            lblTip.UseCompatibleTextRendering = true;
             // 
             // ProgressForm
             // 

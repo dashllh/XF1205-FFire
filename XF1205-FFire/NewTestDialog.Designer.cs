@@ -67,6 +67,8 @@
             txtTestMemo = new TextBox();
             dataModelBindingSource1 = new BindingSource(components);
             dataModelBindingSource2 = new BindingSource(components);
+            label14 = new Label();
+            label15 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataModelBindingSource).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -206,6 +208,8 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(label15);
+            groupBox2.Controls.Add(label14);
             groupBox2.Controls.Add(txtSamplePrepareTime);
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(txtProductName);
@@ -426,6 +430,30 @@
             // 
             dataModelBindingSource2.DataSource = typeof(DataModel);
             // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.FlatStyle = FlatStyle.Flat;
+            label14.ForeColor = Color.Red;
+            label14.Location = new Point(214, 64);
+            label14.Name = "label14";
+            label14.Size = new Size(13, 17);
+            label14.TabIndex = 9;
+            label14.Text = "*";
+            label14.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.FlatStyle = FlatStyle.Flat;
+            label15.ForeColor = Color.Red;
+            label15.Location = new Point(7, 64);
+            label15.Name = "label15";
+            label15.Size = new Size(13, 17);
+            label15.TabIndex = 10;
+            label15.Text = "*";
+            label15.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // NewTestDialog
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -503,5 +531,7 @@
         private BindingSource dataModelBindingSource;
         private BindingSource dataModelBindingSource1;
         private BindingSource dataModelBindingSource2;
+        private Label label14;
+        private Label label15;
     }
 }

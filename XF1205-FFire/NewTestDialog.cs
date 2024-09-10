@@ -15,6 +15,20 @@ namespace XF1205_FFire
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
+            if (txtSampleId.Text == string.Empty)
+            {
+                MessageBox.Show("样品编号不能为空。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSampleId.Focus();
+                return;
+            }
+
+            if (txtTestId.Text == string.Empty)
+            {
+                MessageBox.Show("样品标识号不能为空。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTestId.Focus();
+                return;
+            }
+
             double tmp = 0;
             DateTime tmpDate = DateTime.Now;
             Close();
@@ -61,6 +75,13 @@ namespace XF1205_FFire
                 txtApparatusName.Text = dataModel.ApparatusName;
                 txtApparatusId.Text = dataModel.ApparatusId;
                 txtApparatusCheckDate.Text = dataModel.ApparatusCheckDate;
+
+                txtProductName.Text = dataModel.ProductName;
+                txtSampleId.Text = dataModel.SampleId;
+                txtSamplePrepareTime.Text = dataModel.ProductPrepareTime;
+                txtOperator.Text = dataModel.Operator;
+                txtRptId.Text = dataModel.ReportId;
+                txtTestMemo.Text = dataModel.Memo;
             }
         }
 
