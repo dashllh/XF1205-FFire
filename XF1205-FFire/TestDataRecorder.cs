@@ -17,6 +17,8 @@ using DevExpress.Office.Utils;
 using DevExpress.Data.Filtering;
 using DevExpress.Spreadsheet.Charts;
 
+using MSExcel = Microsoft.Office.Interop.Excel;
+
 namespace XF1205_FFire
 {
     /* 直接从传感器采集数据的版本(从SignalR客户端获取传感器数据的版本另做开发) */
@@ -156,21 +158,18 @@ namespace XF1205_FFire
                 using (ExcelPackage excelPack = new ExcelPackage(new FileInfo(@"D:\\XF 1205-2014 FFire\\chart_template.xlsx")))
                 {                    
                     // 加载传感器温度原始数据
-                    ExcelWorksheet chartSheet = excelPack.Workbook.Worksheets[0];
-                    chartSheet.Workbook.Worksheets[0].Cells["A1"].LoadFromText(new FileInfo($"{datapath}\\sensordata.csv"), format, OfficeOpenXml.Table.TableStyles.None, true);
-
+                    excelPack.Workbook.Worksheets[0].Cells["A1"].LoadFromText(new FileInfo($"{datapath}\\sensordata.csv"), format, 
+                        OfficeOpenXml.Table.TableStyles.None, true);
+                    // 保存至指定文件夹
                     excelPack.SaveAs($"{datapath}\\chart.xlsx");
                 }
 
                 /* 使用DevExpress Office API生成图表并复制到Word报表中 */
-                using (Workbook workbook = new())
+                using (DevExpress.Spreadsheet.Workbook workbook = new())
                 {
                     // 加载报表文件
                     workbook.LoadDocument($"{datapath}\\chart.xlsx");
-                    DevExpress.Spreadsheet.Worksheet worksheet = workbook.Worksheets[0];
-                    // 以图片方式复制曲线图
-                    OfficeImage chartImg = worksheet.Charts[0].GetImage();
-
+                    
                     using (var wordProcessor = new RichEditDocumentServer())
                     {
                         wordProcessor.LoadDocument(@"D:\\XF 1205-2014 FFire\\template.docx");
@@ -211,15 +210,43 @@ namespace XF1205_FFire
                         // 试验备注
                         document.Replace(document.FindAll("[memo]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Memo);
 
+                        MSExcel.Application oApp;
+                        MSExcel.Workbook oWorkbook;
+                        MSExcel.Worksheet oWorksheet;
+
+                        oApp = new MSExcel.Application();
+                        oWorkbook = oApp.Workbooks.OpenXML($"{datapath}\\chart.xlsx");
+                        oWorksheet = oWorkbook.Worksheets.Item[1];
+                        oWorksheet.Shapes.Item(1).Copy();
+
+                        Clipboard.GetImage().Save("E:\\chart.png");
+                        Clipboard.Clear();
+
+                        oWorkbook.Close();
+                        oApp.Quit();
+
                         // 在表格中插入温度曲线图
                         DevExpress.XtraRichEdit.API.Native.Table table = document.Tables[0];
-                        table.BeginUpdate(); 
-                        document.Images.Insert(table[10, 0].Range.Start, chartImg.NativeImage);
+                        table.BeginUpdate();
+                        document.Images.Insert(table[10, 0].Range.Start,Image.FromFile("E:\\chart.png"));
                         table.EndUpdate();
-                        
+
                         wordProcessor.SaveDocument($"{rptpath}\\report.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml);
                     }
                 }
+
+                //MSWord.Application wdApp = new MSWord.Application();
+                //wdApp.Visible = false;
+                //MSWord.Document wdDoc = wdApp.Documents.Open($"{rptpath}\\report.docx");
+                //wdDoc.Activate();
+                //MSWord.Table wdTable = wdDoc.Tables[1];
+                //wdTable.Cell(11, 1).Range.InlineShapes.AddPicture("E:\\chart.png", Type.Missing, Type.Missing, Type.Missing);
+                
+                //wdDoc.Save();
+                //wdDoc.Close();
+                //wdApp.Quit();
+
+
                 MessageBox.Show("生成报告成功!","系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //FileStream stream = File.Create($"{datapath}\\chart.xlsx");
                 //stream.Close();
