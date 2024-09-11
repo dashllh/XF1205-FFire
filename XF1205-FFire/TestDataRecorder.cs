@@ -18,6 +18,7 @@ using DevExpress.Data.Filtering;
 using DevExpress.Spreadsheet.Charts;
 
 using MSExcel = Microsoft.Office.Interop.Excel;
+using System.Diagnostics;
 
 namespace XF1205_FFire
 {
@@ -38,6 +39,8 @@ namespace XF1205_FFire
         private TestForm? _view;
         // 视图显示模型
         private TestViewModel _viewModel;
+
+        private ProgressForm progress;
         public TestDataRecorder()
         {
             _timer = new(RecordData);
@@ -45,6 +48,7 @@ namespace XF1205_FFire
             //_sensorData = new SensorData();
             _sensorDataBuffer = new List<SensorData>();
             _viewModel = new();
+            progress = new ProgressForm();
         }
 
         public void BindView(TestForm view)
@@ -91,7 +95,7 @@ namespace XF1205_FFire
 
             // 计算实时数据
             DoCaculate();
-            
+
             // 更新样品试验视图界面显示
             _viewModel.Counter = _counter;
             _view?.UpdateDisplay(_viewModel);
@@ -107,16 +111,22 @@ namespace XF1205_FFire
 
         public void Stop()
         {
-            _timer.Change(0, Timeout.Infinite);           
-            
+            _timer.Change(0, Timeout.Infinite);
+
         }
 
         public void OutputTestData()
         {
-            _dataModel = AppData.Data?["TestData"] as DataModel;
-            if(_dataModel == null)
+            progress.Show();
+            progress.Invoke(new Action(() =>
             {
-                MessageBox.Show("系统未检测到已录入的样品信息,无法生成报告。","系统提示",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                progress.Update();
+            }));
+
+            _dataModel = AppData.Data?["TestData"] as DataModel;
+            if (_dataModel == null)
+            {
+                MessageBox.Show("系统未检测到已录入的样品信息,无法生成报告。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -156,9 +166,9 @@ namespace XF1205_FFire
                                   // 字符类型引用符 format.TextQualifier = '"';
                 };
                 using (ExcelPackage excelPack = new ExcelPackage(new FileInfo(@"D:\\XF 1205-2014 FFire\\chart_template.xlsx")))
-                {                    
+                {
                     // 加载传感器温度原始数据
-                    excelPack.Workbook.Worksheets[0].Cells["A1"].LoadFromText(new FileInfo($"{datapath}\\sensordata.csv"), format, 
+                    excelPack.Workbook.Worksheets[0].Cells["A1"].LoadFromText(new FileInfo($"{datapath}\\sensordata.csv"), format,
                         OfficeOpenXml.Table.TableStyles.None, true);
                     // 保存至指定文件夹
                     excelPack.SaveAs($"{datapath}\\chart.xlsx");
@@ -167,9 +177,25 @@ namespace XF1205_FFire
                 /* 使用DevExpress Office API生成图表并复制到Word报表中 */
                 using (DevExpress.Spreadsheet.Workbook workbook = new())
                 {
-                    // 加载报表文件
-                    workbook.LoadDocument($"{datapath}\\chart.xlsx");
-                    
+                    // 加载报表文件并保存温度图表为本地文件
+                    //workbook.LoadDocument($"{datapath}\\chart.xlsx");
+                    MSExcel.Application oApp;
+                    MSExcel.Workbook oWorkbook;
+                    MSExcel.Worksheet oWorksheet;
+
+                    oApp = new MSExcel.Application();
+                    oApp.Visible = false;
+                    oWorkbook = oApp.Workbooks.OpenXML($"{datapath}\\chart.xlsx");
+                    oWorksheet = oWorkbook.Worksheets.Item[1];
+                    oWorksheet.Shapes.Item(1).Copy();
+
+                    Clipboard.GetImage().Save($"{datapath}\\chart.png");
+                    Clipboard.Clear();
+
+                    oWorkbook.Close();
+                    oApp.Quit();
+
+                    // 使用 DevExpress Office API 填写Word格式的试验报表
                     using (var wordProcessor = new RichEditDocumentServer())
                     {
                         wordProcessor.LoadDocument(@"D:\\XF 1205-2014 FFire\\template.docx");
@@ -210,28 +236,15 @@ namespace XF1205_FFire
                         // 试验备注
                         document.Replace(document.FindAll("[memo]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Memo);
 
-                        MSExcel.Application oApp;
-                        MSExcel.Workbook oWorkbook;
-                        MSExcel.Worksheet oWorksheet;
-
-                        oApp = new MSExcel.Application();
-                        oWorkbook = oApp.Workbooks.OpenXML($"{datapath}\\chart.xlsx");
-                        oWorksheet = oWorkbook.Worksheets.Item[1];
-                        oWorksheet.Shapes.Item(1).Copy();
-
-                        Clipboard.GetImage().Save("E:\\chart.png");
-                        Clipboard.Clear();
-
-                        oWorkbook.Close();
-                        oApp.Quit();
-
                         // 在表格中插入温度曲线图
+                        Image img = Image.FromFile($"{datapath}\\chart.png");
                         DevExpress.XtraRichEdit.API.Native.Table table = document.Tables[0];
                         table.BeginUpdate();
-                        document.Images.Insert(table[10, 0].Range.Start,Image.FromFile("E:\\chart.png"));
+                        document.Images.Insert(table[10, 0].Range.Start, img);
                         table.EndUpdate();
 
                         wordProcessor.SaveDocument($"{rptpath}\\report.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml);
+                        img.Dispose();
                     }
                 }
 
@@ -241,16 +254,18 @@ namespace XF1205_FFire
                 //wdDoc.Activate();
                 //MSWord.Table wdTable = wdDoc.Tables[1];
                 //wdTable.Cell(11, 1).Range.InlineShapes.AddPicture("E:\\chart.png", Type.Missing, Type.Missing, Type.Missing);
-                
+
                 //wdDoc.Save();
                 //wdDoc.Close();
                 //wdApp.Quit();
 
+                progress.Invoke(new Action(() =>
+                {
+                    progress.Close();
+                }));
 
-                MessageBox.Show("生成报告成功!","系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //FileStream stream = File.Create($"{datapath}\\chart.xlsx");
-                //stream.Close();
-                // 复制曲线图文件至Word报表文件                
+
+                MessageBox.Show("生成报告成功!", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)
             {
