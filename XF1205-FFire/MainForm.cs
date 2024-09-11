@@ -20,8 +20,10 @@ namespace XF1205_FFire
 
         private void btnCalibration_Click(object sender, EventArgs e)
         {
-            Form frmCalibration = new CalibratoinForm();
-            frmCalibration.Show();
+            //Form frmCalibration = new CalibratoinForm();
+            //frmCalibration.Show();
+            Form frmSystemStatus = new SystemStatus();
+            frmSystemStatus.Show();
         }
 
         private void btnNewTest_Click(object sender, EventArgs e)

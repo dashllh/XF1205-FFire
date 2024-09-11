@@ -10,7 +10,6 @@ namespace XF1205_FFire
     {
         // 试验计时器
         public int Counter { get; set; }
-
         // 传感器数据
         public SensorData SensorData { get; set; }
         public TestViewModel() 

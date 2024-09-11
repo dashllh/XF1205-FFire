@@ -94,7 +94,7 @@ namespace XF1205_FFire
             });
 
             // 计算实时数据
-            DoCaculate();
+            //DoCaculate();
 
             // 更新样品试验视图界面显示
             _viewModel.Counter = _counter;
@@ -111,8 +111,7 @@ namespace XF1205_FFire
 
         public void Stop()
         {
-            _timer.Change(0, Timeout.Infinite);
-
+            _timer.Change(0, Timeout.Infinite);                   
         }
 
         public void OutputTestData()
@@ -267,6 +266,8 @@ namespace XF1205_FFire
 
             // 重置试验控制变量
             _counter = 0;
+            // 重置试验界面显示
+            _view?.ResetDisplay();
         }
     }
 }

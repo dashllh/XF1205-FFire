@@ -66,7 +66,7 @@
             btnCalibration.Name = "btnCalibration";
             btnCalibration.Size = new Size(109, 37);
             btnCalibration.TabIndex = 2;
-            btnCalibration.Text = "系统校准";
+            btnCalibration.Text = "系统状态";
             btnCalibration.TextImageRelation = TextImageRelation.TextBeforeImage;
             btnCalibration.UseVisualStyleBackColor = false;
             btnCalibration.Click += btnCalibration_Click;

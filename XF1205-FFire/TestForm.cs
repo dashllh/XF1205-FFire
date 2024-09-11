@@ -8,14 +8,12 @@ namespace XF1205_FFire
     {
         private TestDataRecorder recorder;
         private ApparatusOperator apparatusOperator;
-        //private ProgressForm progress;
         public TestForm()
         {
             InitializeComponent();
             recorder = new TestDataRecorder();
             recorder.BindView(this);
             apparatusOperator = AppData.Data?["Apparatus"] as ApparatusOperator ?? new ApparatusOperator();
-            //progress = new ProgressForm();     
         }
 
         private void btnCloseWindow_Click(object sender, EventArgs e)
@@ -34,9 +32,7 @@ namespace XF1205_FFire
         {
             if (DialogResult.Yes == MessageBox.Show("确定停止本次试验吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-                recorder.Stop();
-                // 重置试验界面显示
-                ResetDisplay();
+                recorder.Stop();                
                 btnStartTest.Enabled = true;
                 btnStopTest.Enabled = false;
             }
@@ -64,18 +60,14 @@ namespace XF1205_FFire
             }
         }
 
-        private void TestForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         public void UpdateDisplay(TestViewModel model)
         {
             try
             {
-                this.Invoke(new Action(() =>
+                Invoke(new Action(() =>
                 {
                     lblTimer.Text = model.Counter.ToString();
+                    lblOilTemperature.Text = model.SensorData.OilTemperature.ToString("0.0");
                     chartOilTemp.Series[0].Points.AddXY(model.Counter, model.SensorData.OilTemperature);
                     // 300秒后开始平移曲线图坐标轴
                     if (model.Counter > 300)
@@ -91,11 +83,13 @@ namespace XF1205_FFire
 
             }
         }
-        private void ResetDisplay()
+        public void ResetDisplay()
         {
-            lblTimer.Text = "0";
-            lblOilTemperature.Text = "8888";
-            chartOilTemp.Series[0].Points.Clear();
+            Invoke(new Action(() => {
+                lblTimer.Text = "0";
+                lblOilTemperature.Text = "8888";
+                chartOilTemp.Series[0].Points.Clear();
+            }));
         }
 
         private void btnGenerateReport_Click(object sender, EventArgs e)

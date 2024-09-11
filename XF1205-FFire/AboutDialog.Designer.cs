@@ -46,6 +46,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.ForeColor = Color.RoyalBlue;
             label1.Location = new Point(29, 52);
             label1.Name = "label1";
             label1.Size = new Size(59, 17);
@@ -55,6 +56,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.ForeColor = Color.RoyalBlue;
             label2.Location = new Point(29, 18);
             label2.Name = "label2";
             label2.Size = new Size(59, 17);
@@ -64,6 +66,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.ForeColor = Color.RoyalBlue;
             label3.Location = new Point(315, 17);
             label3.Name = "label3";
             label3.Size = new Size(59, 17);
@@ -73,6 +76,7 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.ForeColor = Color.RoyalBlue;
             label4.Location = new Point(29, 124);
             label4.Name = "label4";
             label4.Size = new Size(59, 17);
@@ -82,6 +86,7 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.ForeColor = Color.RoyalBlue;
             label5.Location = new Point(315, 124);
             label5.Name = "label5";
             label5.Size = new Size(59, 17);
@@ -91,6 +96,7 @@
             // label6
             // 
             label6.AutoSize = true;
+            label6.ForeColor = Color.RoyalBlue;
             label6.Location = new Point(29, 87);
             label6.Name = "label6";
             label6.Size = new Size(59, 17);
