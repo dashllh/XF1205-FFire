@@ -174,78 +174,70 @@ namespace XF1205_FFire
                     excelPack.SaveAs($"{datapath}\\chart.xlsx");
                 }
 
-                /* 使用DevExpress Office API生成图表并复制到Word报表中 */
-                using (DevExpress.Spreadsheet.Workbook workbook = new())
+                // 加载报表文件并保存温度图表为本地文件
+                MSExcel.Application oApp;
+                MSExcel.Workbook oWorkbook;
+                MSExcel.Worksheet oWorksheet;
+
+                oApp = new MSExcel.Application();
+                oApp.Visible = false;
+                oWorkbook = oApp.Workbooks.OpenXML($"{datapath}\\chart.xlsx");
+                oWorksheet = oWorkbook.Worksheets.Item[1];
+                // 将图表对象复制到系统剪贴板
+                oWorksheet.Shapes.Item(1).Copy();
+
+                oWorkbook.Close();
+                oApp.Quit();
+
+                // 使用 DevExpress Office API 填写Word格式的试验报表
+                using (var wordProcessor = new RichEditDocumentServer())
                 {
-                    // 加载报表文件并保存温度图表为本地文件
-                    //workbook.LoadDocument($"{datapath}\\chart.xlsx");
-                    MSExcel.Application oApp;
-                    MSExcel.Workbook oWorkbook;
-                    MSExcel.Worksheet oWorksheet;
+                    wordProcessor.LoadDocument(@"D:\\XF 1205-2014 FFire\\template.docx");
 
-                    oApp = new MSExcel.Application();
-                    oApp.Visible = false;
-                    oWorkbook = oApp.Workbooks.OpenXML($"{datapath}\\chart.xlsx");
-                    oWorksheet = oWorkbook.Worksheets.Item[1];
-                    oWorksheet.Shapes.Item(1).Copy();
+                    Document document = wordProcessor.Document;
+                    // 设置Word格式试验报表的表格数据
+                    /* 填充非表格化数据 */
+                    // 检验日期
+                    document.Replace(document.FindAll("[testdate]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.TestDate.ToString("yyyy年MM月dd日"));
+                    // 检验人员
+                    document.Replace(document.FindAll("[operator]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Operator);
+                    // 设置实验室湿度
+                    document.Replace(document.FindAll("[humidity]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Humidity.ToString());
+                    // 设置实验室温度
+                    document.Replace(document.FindAll("[labtemp]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.LabTemperature.ToString());
+                    // 设置报告编号
+                    document.Replace(document.FindAll("[rptno]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ReportId);
+                    // 产品名称 
+                    document.Replace(document.FindAll("[productname]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ProductName);
+                    // 样品编号
+                    document.Replace(document.FindAll("[sampleid]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.SampleId);
+                    // 试验编号(标识号)
+                    document.Replace(document.FindAll("[testid]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.TestId);
+                    // 检验依据
+                    document.Replace(document.FindAll("[testaccord]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.TestAccord);
+                    // 样品养护时间
+                    document.Replace(document.FindAll("[productpreparetime]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ProductPrepareTime);
+                    // 设备检定日期
+                    document.Replace(document.FindAll("[apparatuscheckdate]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ApparatusCheckDate);
+                    // 设备编号
+                    document.Replace(document.FindAll("[apparatusid]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ApparatusId);
+                    // 试验结论1
+                    document.Replace(document.FindAll("[result1]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result1 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason1 + ",不符合要求");
+                    // 试验结论2
+                    document.Replace(document.FindAll("[result2]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result2 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason2 + ",不符合要求");
+                    // 试验结论3
+                    document.Replace(document.FindAll("[result3]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result3 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason3 + ",不符合要求");
+                    // 试验备注
+                    document.Replace(document.FindAll("[memo]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Memo);
 
-                    Clipboard.GetImage().Save($"{datapath}\\chart.png");
+                    // 在表格中插入温度曲线图
+                    DevExpress.XtraRichEdit.API.Native.Table table = document.Tables[0];
+                    table.BeginUpdate();
+                    document.Images.Insert(table[10, 0].Range.Start, Clipboard.GetImage());
+                    table.EndUpdate();
+
                     Clipboard.Clear();
-
-                    oWorkbook.Close();
-                    oApp.Quit();
-
-                    // 使用 DevExpress Office API 填写Word格式的试验报表
-                    using (var wordProcessor = new RichEditDocumentServer())
-                    {
-                        wordProcessor.LoadDocument(@"D:\\XF 1205-2014 FFire\\template.docx");
-
-                        Document document = wordProcessor.Document;
-                        // 设置Word格式试验报表的表格数据
-                        /* 填充非表格化数据 */
-                        // 检验日期
-                        document.Replace(document.FindAll("[testdate]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.TestDate.ToString("yyyy年MM月dd日"));
-                        // 检验人员
-                        document.Replace(document.FindAll("[operator]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Operator);
-                        // 设置实验室湿度
-                        document.Replace(document.FindAll("[humidity]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Humidity.ToString());
-                        // 设置实验室温度
-                        document.Replace(document.FindAll("[labtemp]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.LabTemperature.ToString());
-                        // 设置报告编号
-                        document.Replace(document.FindAll("[rptno]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ReportId);
-                        // 产品名称 
-                        document.Replace(document.FindAll("[productname]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ProductName);
-                        // 样品编号
-                        document.Replace(document.FindAll("[sampleid]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.SampleId);
-                        // 试验编号(标识号)
-                        document.Replace(document.FindAll("[testid]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.TestId);
-                        // 检验依据
-                        document.Replace(document.FindAll("[testaccord]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.TestAccord);
-                        // 样品养护时间
-                        document.Replace(document.FindAll("[productpreparetime]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ProductPrepareTime);
-                        // 设备检定日期
-                        document.Replace(document.FindAll("[apparatuscheckdate]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ApparatusCheckDate);
-                        // 设备编号
-                        document.Replace(document.FindAll("[apparatusid]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ApparatusId);
-                        // 试验结论1
-                        document.Replace(document.FindAll("[result1]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result1 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason1 + ",不符合要求");
-                        // 试验结论2
-                        document.Replace(document.FindAll("[result2]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result2 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason2 + ",不符合要求");
-                        // 试验结论3
-                        document.Replace(document.FindAll("[result3]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result3 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason3 + ",不符合要求");
-                        // 试验备注
-                        document.Replace(document.FindAll("[memo]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Memo);
-
-                        // 在表格中插入温度曲线图
-                        Image img = Image.FromFile($"{datapath}\\chart.png");
-                        DevExpress.XtraRichEdit.API.Native.Table table = document.Tables[0];
-                        table.BeginUpdate();
-                        document.Images.Insert(table[10, 0].Range.Start, img);
-                        table.EndUpdate();
-
-                        wordProcessor.SaveDocument($"{rptpath}\\report.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml);
-                        img.Dispose();
-                    }
+                    wordProcessor.SaveDocument($"{rptpath}\\report.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml);
                 }
 
                 //MSWord.Application wdApp = new MSWord.Application();
