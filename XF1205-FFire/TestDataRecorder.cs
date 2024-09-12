@@ -106,6 +106,7 @@ namespace XF1205_FFire
 
         public void Start()
         {
+            _sensorDataBuffer?.Clear();
             _timer.Change(0, 1000);
         }
 
@@ -266,6 +267,8 @@ namespace XF1205_FFire
 
             // 重置试验控制变量
             _counter = 0;
+            // 清空采集数据缓存
+            _sensorDataBuffer?.Clear();
             // 重置试验界面显示
             _view?.ResetDisplay();
         }

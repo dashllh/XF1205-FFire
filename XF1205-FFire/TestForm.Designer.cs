@@ -149,7 +149,7 @@
             groupBox6.Size = new Size(675, 136);
             groupBox6.TabIndex = 14;
             groupBox6.TabStop = false;
-            groupBox6.Text = "检验项目及结果";
+            groupBox6.Text = "试验记录";
             // 
             // panel3
             // 

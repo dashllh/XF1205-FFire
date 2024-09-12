@@ -18,7 +18,11 @@ namespace XF1205_FFire
 
         private void btnCloseWindow_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if(DialogResult.Yes == MessageBox.Show("关闭试验对话框会终止当前试验,数据无法保存,是否继续？", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            {
+                recorder.Stop();
+                Close();
+            }            
         }
 
         private void btnStartTest_Click(object sender, EventArgs e)
