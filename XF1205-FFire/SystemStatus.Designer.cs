@@ -95,7 +95,8 @@
             MaximizeBox = false;
             Name = "SystemStatus";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "SystemStatus";
+            Text = "系统状态";
+            TopMost = true;
             Load += SystemStatus_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
