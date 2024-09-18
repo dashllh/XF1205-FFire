@@ -1,7 +1,7 @@
 {
   "apparatus": {
-    "port": "COM1",
-    "port2": "COM2"
+    "ComPortTemperature": "COM1",
+    "ComPortRelay": "COM2"
   },
   "defaultvalue": {
     "LabTemperature": "25",

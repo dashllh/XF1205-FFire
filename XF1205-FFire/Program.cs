@@ -21,11 +21,13 @@ namespace XF1205_FFire
             SensorData sensorData = new SensorData();
             ApparatusOperator apparatus = new ApparatusOperator();
             DataModel dataModel = new DataModel();
+            Apparatus comport = new Apparatus();
 
             // 获取配置文件对应项,并绑定至对应的Object instance
             config.GetSection("defaultvalue").Bind(dataModel);
+            config.GetSection("apparatus").Bind(comport);
 
-            if (apparatus.EstablishConnection("COM2","COM3"))
+            if (apparatus.EstablishConnection(comport.ComPortTemperature, comport.ComPortRelay))
             {
                 // 启动试验设备数据采集
                 apparatus.InitializeApparatus();
