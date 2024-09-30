@@ -402,7 +402,7 @@
             // 
             // btnGenerateReport
             // 
-            btnGenerateReport.Location = new Point(717, 417);
+            btnGenerateReport.Location = new Point(717, 428);
             btnGenerateReport.Name = "btnGenerateReport";
             btnGenerateReport.Size = new Size(126, 42);
             btnGenerateReport.TabIndex = 20;
@@ -412,7 +412,7 @@
             // 
             // btnCloseWindow
             // 
-            btnCloseWindow.Location = new Point(717, 475);
+            btnCloseWindow.Location = new Point(717, 486);
             btnCloseWindow.Name = "btnCloseWindow";
             btnCloseWindow.Size = new Size(126, 42);
             btnCloseWindow.TabIndex = 21;
