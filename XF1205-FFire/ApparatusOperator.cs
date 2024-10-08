@@ -83,19 +83,19 @@ namespace XF1205_FFire
          */
         public bool EstablishConnection(string port,string port2)
         {
-            //_client.Connect(port, ModbusEndianness.BigEndian);
-            //if (!_client.IsConnected)
-            //{
-            //    // 温度模块连接失败
-            //    return false;
-            //}
+            _client.Connect(port, ModbusEndianness.BigEndian);
+            if (!_client.IsConnected)
+            {
+                // 温度模块连接失败
+                return false;
+            }
 
-            //_relay.Connect(port2, ModbusEndianness.BigEndian);
-            //if (!_relay.IsConnected)
-            //{
-            //    // 电磁阀控制模块连接失败
-            //    return false;
-            //}
+            _relay.Connect(port2, ModbusEndianness.BigEndian);
+            if (!_relay.IsConnected)
+            {
+                // 电磁阀控制模块连接失败
+                return false;
+            }
             return true;
         }
 
