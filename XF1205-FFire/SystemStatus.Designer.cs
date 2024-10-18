@@ -57,7 +57,7 @@
             lblOilTemperatuer.Name = "lblOilTemperatuer";
             lblOilTemperatuer.Size = new Size(106, 40);
             lblOilTemperatuer.TabIndex = 1;
-            lblOilTemperatuer.Text = "8888";
+            lblOilTemperatuer.Text = "888";
             lblOilTemperatuer.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label1
