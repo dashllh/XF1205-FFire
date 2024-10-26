@@ -26,7 +26,7 @@ namespace XF1205_FFire
         private void timerSystemStatus_Tick(object sender, EventArgs e)
         {
             var sensorData = AppData.Data?["SensorData"] as SensorData;
-            lblOilTemperatuer.Text = sensorData?.OilTemperature.ToString();
+            lblOilTemperatuer.Text = sensorData?.OilTemperature.ToString("0.0");
         }
 
         private void SystemStatus_Load(object sender, EventArgs e)

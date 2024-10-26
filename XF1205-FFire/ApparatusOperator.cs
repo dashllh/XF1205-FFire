@@ -187,13 +187,15 @@ namespace XF1205_FFire
                         }
                     }
                 }
-                catch (TimeoutException)
+                catch (TimeoutException e)
                 {
+                    MessageBox.Show(e.Message,"系统异常",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                     ret = false;
                     data = 0;
                 }
-                catch (ModbusException)
+                catch (ModbusException e)
                 {
+                    MessageBox.Show(e.Message, "系统异常", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     ret = false;
                     data = 0;
                 }

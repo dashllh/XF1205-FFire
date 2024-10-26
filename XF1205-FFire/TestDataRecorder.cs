@@ -19,6 +19,7 @@ using DevExpress.Spreadsheet.Charts;
 
 using MSExcel = Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace XF1205_FFire
 {
@@ -181,12 +182,13 @@ namespace XF1205_FFire
 
                 oApp = new MSExcel.Application();
                 oApp.Visible = false;
+                oApp.DisplayAlerts = false;
                 oWorkbook = oApp.Workbooks.OpenXML($"{datapath}\\chart.xlsx");
                 oWorksheet = oWorkbook.Worksheets.Item[1];
                 // 将图表对象复制到系统剪贴板
                 oWorksheet.Shapes.Item(1).Copy();
 
-                oWorkbook.Close();
+                oWorkbook.Close(false);
                 oApp.Quit();
 
                 // 使用 DevExpress Office API 填写Word格式的试验报表
