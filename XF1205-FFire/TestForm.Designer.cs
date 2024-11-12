@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -60,6 +61,7 @@
             btnCloseValve = new Button();
             btnGenerateReport = new Button();
             btnCloseWindow = new Button();
+            timer_counting = new System.Windows.Forms.Timer(components);
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox6.SuspendLayout();
@@ -402,6 +404,7 @@
             // 
             // btnGenerateReport
             // 
+            btnGenerateReport.Enabled = false;
             btnGenerateReport.Location = new Point(717, 428);
             btnGenerateReport.Name = "btnGenerateReport";
             btnGenerateReport.Size = new Size(126, 42);
@@ -419,6 +422,11 @@
             btnCloseWindow.Text = "关闭";
             btnCloseWindow.UseVisualStyleBackColor = true;
             btnCloseWindow.Click += btnCloseWindow_Click;
+            // 
+            // timer_counting
+            // 
+            timer_counting.Interval = 1000;
+            timer_counting.Tick += timer_counting_Tick;
             // 
             // TestForm
             // 
@@ -488,5 +496,6 @@
         private Panel panel2;
         private RadioButton rdoNG2;
         private RadioButton rdoOK2;
+        private System.Windows.Forms.Timer timer_counting;
     }
 }

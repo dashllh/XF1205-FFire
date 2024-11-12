@@ -1,16 +1,19 @@
 ﻿
 using DevExpress.XtraSpreadsheet.Model;
+using Microsoft.Office.Interop.Excel;
 using System;
 
 namespace XF1205_FFire
 {
     public partial class TestForm : Form
     {
+        private int _counter;
         private TestDataRecorder recorder;
         private ApparatusOperator apparatusOperator;
         public TestForm()
         {
             InitializeComponent();
+            _counter = 0;
             recorder = new TestDataRecorder();
             recorder.BindView(this);
             apparatusOperator = AppData.Data?["Apparatus"] as ApparatusOperator ?? new ApparatusOperator();
@@ -18,25 +21,32 @@ namespace XF1205_FFire
 
         private void btnCloseWindow_Click(object sender, EventArgs e)
         {
-            if(DialogResult.Yes == MessageBox.Show("关闭试验对话框会退出当前试验,数据无法保存,是否继续？", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            if (DialogResult.Yes == MessageBox.Show("关闭试验对话框会退出当前试验,数据无法保存,是否继续？", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 recorder.Stop();
                 Close();
-            }            
+            }
         }
 
         private void btnStartTest_Click(object sender, EventArgs e)
         {
-            recorder.Start();
+            //recorder.Start();
+            // 停止数据记录,启动界面计时器,只负责更新并显示计时值
+            recorder.Stop();
+            timer_counting.Start();
             btnStartTest.Enabled = false;
             btnStopTest.Enabled = true;
+            // 开始计时后才允许点击生成报表按钮,避免因List对象不支持多线程操作而引起系统异常
+            btnGenerateReport.Enabled = true;
         }
 
         private void btnStopTest_Click(object sender, EventArgs e)
         {
             if (DialogResult.Yes == MessageBox.Show("确定停止本次试验吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-                recorder.Stop();                
+                //recorder.Stop();
+                // 停止界面计时更新
+                timer_counting.Stop();
                 btnStartTest.Enabled = true;
                 btnStopTest.Enabled = false;
             }
@@ -68,9 +78,10 @@ namespace XF1205_FFire
         {
             try
             {
-                Invoke(new Action(() =>
+                Invoke(new System.Action(() =>
                 {
-                    lblTimer.Text = model.Counter.ToString();
+                    // 开始记录升温数据,但不更新计时器显示,计时器显示由独立的变量控制
+                    //lblTimer.Text = model.Counter.ToString();
                     lblOilTemperature.Text = model.SensorData.OilTemperature.ToString("0.0");
                     chartOilTemp.Series[0].Points.AddXY(model.Counter, model.SensorData.OilTemperature);
                     // 300秒后开始平移曲线图坐标轴
@@ -79,7 +90,6 @@ namespace XF1205_FFire
                         chartOilTemp.ChartAreas[0].AxisX.Minimum = model.Counter - 300;
                         chartOilTemp.ChartAreas[0].AxisX.Maximum = model.Counter;
                     }
-
                 }));
             }
             catch (InvalidOperationException)
@@ -89,11 +99,17 @@ namespace XF1205_FFire
         }
         public void ResetDisplay()
         {
-            Invoke(new Action(() => {
+            Invoke(new System.Action(() =>
+            {
                 lblTimer.Text = "0";
                 lblOilTemperature.Text = "8888";
                 chartOilTemp.Series[0].Points.Clear();
             }));
+        }
+
+        public void StartCharting()
+        {
+            recorder.Start();
         }
 
         private void btnGenerateReport_Click(object sender, EventArgs e)
@@ -118,7 +134,6 @@ namespace XF1205_FFire
                 dataModel.Result1 = rdoNG1.Checked ? false : true;
             }
         }
-
         private void rdoOK2_CheckedChanged(object sender, EventArgs e)
         {
             DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
@@ -158,7 +173,7 @@ namespace XF1205_FFire
         private void txtNGReason1_Leave(object sender, EventArgs e)
         {
             DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
-            if (dataModel != null) 
+            if (dataModel != null)
             {
                 dataModel.NGReason1 = txtNGReason1.Text;
             }
@@ -180,6 +195,11 @@ namespace XF1205_FFire
             {
                 dataModel.NGReason3 = txtNGReason3.Text;
             }
+        }
+        private void timer_counting_Tick(object sender, EventArgs e)
+        {
+            lblTimer.Text = _counter.ToString();
+            _counter++;
         }
     }
 }

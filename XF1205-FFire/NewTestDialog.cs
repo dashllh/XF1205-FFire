@@ -59,8 +59,10 @@ namespace XF1205_FFire
                 // 备注
                 dataModel.Memo = txtTestMemo.Text;
             }
-            Form frmTestForm = new TestForm();
+            TestForm frmTestForm = new TestForm();
             frmTestForm.Show();
+            // 启动数据记录及曲线显示
+            frmTestForm.StartCharting();
         }
 
         private void NewTestDialog_Load(object sender, EventArgs e)

@@ -1,25 +1,9 @@
 ﻿using CsvHelper;
-using DevExpress.XtraSpreadsheet.Model;
-using DevExpress.XtraSpreadsheet.Utils;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OfficeOpenXml;
-using System.IO.Packaging;
-using OfficeOpenXml.Drawing.Chart;
-using DevExpress.Spreadsheet;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraRichEdit.API.Native;
-using DevExpress.Office.Utils;
-using DevExpress.Data.Filtering;
-using DevExpress.Spreadsheet.Charts;
-
 using MSExcel = Microsoft.Office.Interop.Excel;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace XF1205_FFire
 {
@@ -30,8 +14,6 @@ namespace XF1205_FFire
         private readonly System.Threading.Timer _timer;
         // 数据采集计数器
         private int _counter;
-        // 传感器最新数据
-        //private SensorData _sensorData;
         // 传感器原始数据缓存
         private List<SensorData> _sensorDataBuffer;
         // 样品数据模型
@@ -40,13 +22,13 @@ namespace XF1205_FFire
         private TestForm? _view;
         // 视图显示模型
         private TestViewModel _viewModel;
-
+        // 生成报表时的提示框窗体
         private ProgressForm progress;
+
         public TestDataRecorder()
         {
             _timer = new(RecordData);
             _counter = 0;
-            //_sensorData = new SensorData();
             _sensorDataBuffer = new List<SensorData>();
             _viewModel = new();
             progress = new ProgressForm();
@@ -67,19 +49,12 @@ namespace XF1205_FFire
             var sensorData = AppData.Data?["SensorData"] as SensorData;
             if (sensorData is not null)
             {
-                //_sensorData.OilTemperature = sensorData.OilTemperature;
                 _viewModel.SensorData.OilTemperature = sensorData.OilTemperature;
             }
 
             return true;
         }
-        // 根据获取的最新传感器数据计算对应实时数据
-        private void DoCaculate()
-        {
-            // 计算当前温度升高速度
-            // ...
-        }
-
+        
         // 试验数据记录线程函数
         private void RecordData(object? status)
         {
@@ -93,9 +68,6 @@ namespace XF1205_FFire
                 Timer = _counter,
                 OilTemperature = _viewModel.SensorData.OilTemperature
             });
-
-            // 计算实时数据
-            //DoCaculate();
 
             // 更新样品试验视图界面显示
             _viewModel.Counter = _counter;
@@ -242,29 +214,16 @@ namespace XF1205_FFire
                     wordProcessor.SaveDocument($"{rptpath}\\report.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml);
                 }
 
-                //MSWord.Application wdApp = new MSWord.Application();
-                //wdApp.Visible = false;
-                //MSWord.Document wdDoc = wdApp.Documents.Open($"{rptpath}\\report.docx");
-                //wdDoc.Activate();
-                //MSWord.Table wdTable = wdDoc.Tables[1];
-                //wdTable.Cell(11, 1).Range.InlineShapes.AddPicture("E:\\chart.png", Type.Missing, Type.Missing, Type.Missing);
-
-                //wdDoc.Save();
-                //wdDoc.Close();
-                //wdApp.Quit();
-
                 progress.Invoke(new Action(() =>
                 {
                     progress.Close();
                 }));
-
 
                 MessageBox.Show("生成报告成功!", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "系统异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
             }
 
             // 重置试验控制变量

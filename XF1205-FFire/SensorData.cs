@@ -11,7 +11,7 @@ namespace XF1205_FFire
         // 计时器
         public int Timer { get; set; } = 0;
         // 油面温度
-        public double OilTemperature { get; set; } = 8888.8;
+        public double OilTemperature { get; set; } = 8888;
         public SensorData() { }
     }
 }

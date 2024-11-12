@@ -46,15 +46,15 @@ namespace XF1205_FFire
             _client.BaudRate = 9600;
             _client.Parity = Parity.None;
             _client.StopBits = StopBits.One;
-            _client.ReadTimeout = 1000;
-            _client.WriteTimeout = 1000;
+            _client.ReadTimeout = 5000;
+            _client.WriteTimeout = 5000;
 
             _relay = new();
             _relay.BaudRate = 9600;
             _relay.Parity = Parity.None;
             _relay.StopBits = StopBits.One;
-            _relay.ReadTimeout = 1000;
-            _relay.WriteTimeout = 1000;
+            _relay.ReadTimeout = 5000;
+            _relay.WriteTimeout = 5000;
 
             // 初始化传感器默认值
             _oilTemp = 8888;
@@ -234,15 +234,17 @@ namespace XF1205_FFire
                         }
                     }
                 }
-                catch (TimeoutException)
+                catch (TimeoutException e)
                 {
                     ret = false;
                     data = 0;
+                    MessageBox.Show(e.Message, "系统异常", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                catch (ModbusException)
+                catch (ModbusException e)
                 {
                     ret = false;
                     data = 0;
+                    MessageBox.Show(e.Message, "系统异常", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 return (ret, data);
             }
