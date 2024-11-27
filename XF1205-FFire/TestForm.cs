@@ -9,14 +9,18 @@ namespace XF1205_FFire
     {
         private int _counter;
         private TestDataRecorder recorder;
-        private ApparatusOperator apparatusOperator;
+        //private ApparatusOperator apparatusOperator;
+        // 前一分钟的油面瞬时温度
+        private double _oilTempPre;
+        // 当前油面温度
+        private double _oilTemperature;
         public TestForm()
         {
             InitializeComponent();
             _counter = 0;
             recorder = new TestDataRecorder();
             recorder.BindView(this);
-            apparatusOperator = AppData.Data?["Apparatus"] as ApparatusOperator ?? new ApparatusOperator();
+            //apparatusOperator = AppData.Data?["Apparatus"] as ApparatusOperator ?? new ApparatusOperator();
         }
 
         private void btnCloseWindow_Click(object sender, EventArgs e)
@@ -28,11 +32,11 @@ namespace XF1205_FFire
             }
         }
 
+        // 开始2Min计时
         private void btnStartTest_Click(object sender, EventArgs e)
         {
-            //recorder.Start();
-            // 停止数据记录,启动界面计时器,只负责更新并显示计时值
-            recorder.Stop();
+            // 启动界面计时器,只负责更新并显示计时值
+            _counter = 0;
             timer_counting.Start();
             btnStartTest.Enabled = false;
             btnStopTest.Enabled = true;
@@ -44,7 +48,6 @@ namespace XF1205_FFire
         {
             if (DialogResult.Yes == MessageBox.Show("确定停止本次试验吗?", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-                //recorder.Stop();
                 // 停止界面计时更新
                 timer_counting.Stop();
                 btnStartTest.Enabled = true;
@@ -81,8 +84,11 @@ namespace XF1205_FFire
                 Invoke(new System.Action(() =>
                 {
                     // 开始记录升温数据,但不更新计时器显示,计时器显示由独立的变量控制
-                    //lblTimer.Text = model.Counter.ToString();
+                    // 更新升温计时器显示值
+                    lblHeatTime.Text = model.Counter.ToString();
+                    // 更新油面温度显示值
                     lblOilTemperature.Text = model.SensorData.OilTemperature.ToString("0.0");
+                    // 更新温度曲线显示
                     chartOilTemp.Series[0].Points.AddXY(model.Counter, model.SensorData.OilTemperature);
                     // 300秒后开始平移曲线图坐标轴
                     if (model.Counter > 300)
@@ -90,11 +96,17 @@ namespace XF1205_FFire
                         chartOilTemp.ChartAreas[0].AxisX.Minimum = model.Counter - 300;
                         chartOilTemp.ChartAreas[0].AxisX.Maximum = model.Counter;
                     }
+                    // 按60秒频率更新油面温度变化值
+                    if(model.Counter >= 60 && model.Counter % 60 == 0)
+                    {
+                        lblOilTemperatureDelta.Text = ((_oilTemperature - _oilTempPre).ToString("0.0"));
+                        // 保存当前油面温度为上一分钟的温度
+                        _oilTempPre = _oilTemperature;
+                    }
                 }));
             }
             catch (InvalidOperationException)
             {
-
             }
         }
         public void ResetDisplay()
@@ -103,13 +115,10 @@ namespace XF1205_FFire
             {
                 lblTimer.Text = "0";
                 lblOilTemperature.Text = "8888";
+                lblHeatTime.Text = "0";
+                lblOilTemperatureDelta.Text = "8888";
                 chartOilTemp.Series[0].Points.Clear();
             }));
-        }
-
-        public void StartCharting()
-        {
-            recorder.Start();
         }
 
         private void btnGenerateReport_Click(object sender, EventArgs e)
@@ -200,6 +209,22 @@ namespace XF1205_FFire
         {
             lblTimer.Text = _counter.ToString();
             _counter++;
+        }
+
+        private void btnStartHeat_Click(object sender, EventArgs e)
+        {
+            // 开始记录温度数据
+            recorder.Start();
+            btnStartHeat.Enabled = false;   
+            btnStopHeat.Enabled = true;
+        }
+
+        private void btnStopHeat_Click(object sender, EventArgs e)
+        {
+            // 停止温度数据记录
+            recorder.Stop();
+            btnStartHeat.Enabled = true;
+            btnStopHeat.Enabled = false;
         }
     }
 }

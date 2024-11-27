@@ -62,7 +62,7 @@ namespace XF1205_FFire
             TestForm frmTestForm = new TestForm();
             frmTestForm.Show();
             // 启动数据记录及曲线显示
-            frmTestForm.StartCharting();
+            //frmTestForm.StartCharting();
         }
 
         private void NewTestDialog_Load(object sender, EventArgs e)

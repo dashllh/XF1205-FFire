@@ -34,18 +34,14 @@
             label1 = new Label();
             btnClose = new Button();
             timerSystemStatus = new System.Windows.Forms.Timer(components);
-            groupBox2 = new GroupBox();
-            lblOilTemperatureDelta = new Label();
-            label3 = new Label();
             groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(lblOilTemperatuer);
             groupBox1.Controls.Add(label1);
-            groupBox1.Location = new Point(36, 25);
+            groupBox1.Location = new Point(114, 23);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(112, 73);
             groupBox1.TabIndex = 0;
@@ -75,7 +71,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(132, 124);
+            btnClose.Location = new Point(127, 116);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(86, 33);
             btnClose.TabIndex = 1;
@@ -88,44 +84,11 @@
             timerSystemStatus.Interval = 1000;
             timerSystemStatus.Tick += timerSystemStatus_Tick;
             // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(lblOilTemperatureDelta);
-            groupBox2.Controls.Add(label3);
-            groupBox2.Location = new Point(206, 25);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(112, 73);
-            groupBox2.TabIndex = 2;
-            groupBox2.TabStop = false;
-            // 
-            // lblOilTemperatureDelta
-            // 
-            lblOilTemperatureDelta.BackColor = Color.Black;
-            lblOilTemperatureDelta.Dock = DockStyle.Bottom;
-            lblOilTemperatureDelta.Font = new Font("Arial", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOilTemperatureDelta.ForeColor = Color.Yellow;
-            lblOilTemperatureDelta.Location = new Point(3, 30);
-            lblOilTemperatureDelta.Name = "lblOilTemperatureDelta";
-            lblOilTemperatureDelta.Size = new Size(106, 40);
-            lblOilTemperatureDelta.TabIndex = 1;
-            lblOilTemperatureDelta.Text = "8888";
-            lblOilTemperatureDelta.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(6, 11);
-            label3.Name = "label3";
-            label3.Size = new Size(102, 17);
-            label3.TabIndex = 0;
-            label3.Text = "升温速率(℃/min)";
-            // 
             // SystemStatus
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(355, 176);
-            Controls.Add(groupBox2);
+            ClientSize = new Size(342, 172);
             Controls.Add(btnClose);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -137,8 +100,6 @@
             Load += SystemStatus_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -149,8 +110,5 @@
         private Label lblOilTemperatuer;
         private Button btnClose;
         private System.Windows.Forms.Timer timerSystemStatus;
-        private GroupBox groupBox2;
-        private Label lblOilTemperatureDelta;
-        private Label label3;
     }
 }

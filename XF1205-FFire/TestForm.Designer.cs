@@ -62,6 +62,14 @@
             btnGenerateReport = new Button();
             btnCloseWindow = new Button();
             timer_counting = new System.Windows.Forms.Timer(components);
+            groupBox3 = new GroupBox();
+            lblHeatTime = new Label();
+            label4 = new Label();
+            groupBox4 = new GroupBox();
+            lblOilTemperatureDelta = new Label();
+            label2 = new Label();
+            btnStartHeat = new Button();
+            btnStopHeat = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox6.SuspendLayout();
@@ -69,6 +77,8 @@
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chartOilTemp).BeginInit();
+            groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -148,7 +158,7 @@
             groupBox6.Controls.Add(label14);
             groupBox6.Location = new Point(27, 397);
             groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(675, 136);
+            groupBox6.Size = new Size(824, 136);
             groupBox6.TabIndex = 14;
             groupBox6.TabStop = false;
             groupBox6.Text = "试验记录";
@@ -256,7 +266,7 @@
             // 
             txtNGReason3.Location = new Point(510, 104);
             txtNGReason3.Name = "txtNGReason3";
-            txtNGReason3.Size = new Size(144, 23);
+            txtNGReason3.Size = new Size(300, 23);
             txtNGReason3.TabIndex = 11;
             txtNGReason3.Leave += txtNGReason3_Leave;
             // 
@@ -264,7 +274,7 @@
             // 
             txtNGReason2.Location = new Point(510, 68);
             txtNGReason2.Name = "txtNGReason2";
-            txtNGReason2.Size = new Size(144, 23);
+            txtNGReason2.Size = new Size(300, 23);
             txtNGReason2.TabIndex = 10;
             txtNGReason2.Leave += txtNGReason2_Leave;
             // 
@@ -272,7 +282,7 @@
             // 
             txtNGReason1.Location = new Point(510, 31);
             txtNGReason1.Name = "txtNGReason1";
-            txtNGReason1.Size = new Size(144, 23);
+            txtNGReason1.Size = new Size(300, 23);
             txtNGReason1.TabIndex = 9;
             txtNGReason1.Leave += txtNGReason1_Leave;
             // 
@@ -377,7 +387,7 @@
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             chartOilTemp.Series.Add(series1);
-            chartOilTemp.Size = new Size(694, 348);
+            chartOilTemp.Size = new Size(702, 348);
             chartOilTemp.TabIndex = 17;
             chartOilTemp.Text = "chart1";
             // 
@@ -405,9 +415,9 @@
             // btnGenerateReport
             // 
             btnGenerateReport.Enabled = false;
-            btnGenerateReport.Location = new Point(717, 428);
+            btnGenerateReport.Location = new Point(872, 428);
             btnGenerateReport.Name = "btnGenerateReport";
-            btnGenerateReport.Size = new Size(126, 42);
+            btnGenerateReport.Size = new Size(104, 42);
             btnGenerateReport.TabIndex = 20;
             btnGenerateReport.Text = "生成试验报告";
             btnGenerateReport.UseVisualStyleBackColor = true;
@@ -415,9 +425,9 @@
             // 
             // btnCloseWindow
             // 
-            btnCloseWindow.Location = new Point(717, 486);
+            btnCloseWindow.Location = new Point(872, 482);
             btnCloseWindow.Name = "btnCloseWindow";
-            btnCloseWindow.Size = new Size(126, 42);
+            btnCloseWindow.Size = new Size(104, 42);
             btnCloseWindow.TabIndex = 21;
             btnCloseWindow.Text = "关闭";
             btnCloseWindow.UseVisualStyleBackColor = true;
@@ -428,11 +438,100 @@
             timer_counting.Interval = 1000;
             timer_counting.Tick += timer_counting_Tick;
             // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(lblHeatTime);
+            groupBox3.Controls.Add(label4);
+            groupBox3.Location = new Point(868, 20);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(112, 73);
+            groupBox3.TabIndex = 22;
+            groupBox3.TabStop = false;
+            // 
+            // lblHeatTime
+            // 
+            lblHeatTime.BackColor = Color.Black;
+            lblHeatTime.Dock = DockStyle.Bottom;
+            lblHeatTime.Font = new Font("Arial", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblHeatTime.ForeColor = Color.Yellow;
+            lblHeatTime.Location = new Point(3, 30);
+            lblHeatTime.Name = "lblHeatTime";
+            lblHeatTime.Size = new Size(106, 40);
+            lblHeatTime.TabIndex = 1;
+            lblHeatTime.Text = "8888";
+            lblHeatTime.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(6, 11);
+            label4.Name = "label4";
+            label4.Size = new Size(70, 17);
+            label4.TabIndex = 0;
+            label4.Text = "升温计时(s)";
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(lblOilTemperatureDelta);
+            groupBox4.Controls.Add(label2);
+            groupBox4.Location = new Point(868, 99);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(112, 73);
+            groupBox4.TabIndex = 23;
+            groupBox4.TabStop = false;
+            // 
+            // lblOilTemperatureDelta
+            // 
+            lblOilTemperatureDelta.BackColor = Color.Black;
+            lblOilTemperatureDelta.Dock = DockStyle.Bottom;
+            lblOilTemperatureDelta.Font = new Font("Arial", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOilTemperatureDelta.ForeColor = Color.Yellow;
+            lblOilTemperatureDelta.Location = new Point(3, 30);
+            lblOilTemperatureDelta.Name = "lblOilTemperatureDelta";
+            lblOilTemperatureDelta.Size = new Size(106, 40);
+            lblOilTemperatureDelta.TabIndex = 1;
+            lblOilTemperatureDelta.Text = "8888";
+            lblOilTemperatureDelta.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(6, 11);
+            label2.Name = "label2";
+            label2.Size = new Size(102, 17);
+            label2.TabIndex = 0;
+            label2.Text = "升温速率(℃/min)";
+            // 
+            // btnStartHeat
+            // 
+            btnStartHeat.Location = new Point(872, 193);
+            btnStartHeat.Name = "btnStartHeat";
+            btnStartHeat.Size = new Size(105, 34);
+            btnStartHeat.TabIndex = 24;
+            btnStartHeat.Text = "开始升温计时";
+            btnStartHeat.UseVisualStyleBackColor = true;
+            btnStartHeat.Click += btnStartHeat_Click;
+            // 
+            // btnStopHeat
+            // 
+            btnStopHeat.Enabled = false;
+            btnStopHeat.Location = new Point(872, 243);
+            btnStopHeat.Name = "btnStopHeat";
+            btnStopHeat.Size = new Size(105, 34);
+            btnStopHeat.TabIndex = 25;
+            btnStopHeat.Text = "停止升温计时";
+            btnStopHeat.UseVisualStyleBackColor = true;
+            btnStopHeat.Click += btnStopHeat_Click;
+            // 
             // TestForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(855, 548);
+            ClientSize = new Size(1001, 548);
+            Controls.Add(btnStopHeat);
+            Controls.Add(btnStartHeat);
+            Controls.Add(groupBox4);
+            Controls.Add(groupBox3);
             Controls.Add(btnCloseWindow);
             Controls.Add(btnGenerateReport);
             Controls.Add(btnCloseValve);
@@ -462,6 +561,10 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)chartOilTemp).EndInit();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -497,5 +600,13 @@
         private RadioButton rdoNG2;
         private RadioButton rdoOK2;
         private System.Windows.Forms.Timer timer_counting;
+        private GroupBox groupBox3;
+        private Label lblHeatTime;
+        private Label label4;
+        private GroupBox groupBox4;
+        private Label lblOilTemperatureDelta;
+        private Label label2;
+        private Button btnStartHeat;
+        private Button btnStopHeat;
     }
 }
