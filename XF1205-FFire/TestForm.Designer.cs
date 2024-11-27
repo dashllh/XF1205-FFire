@@ -95,7 +95,7 @@
             // 
             lblTimer.BackColor = Color.Black;
             lblTimer.Dock = DockStyle.Bottom;
-            lblTimer.Font = new Font("Arial", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTimer.Font = new Font("Arial", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblTimer.ForeColor = Color.Yellow;
             lblTimer.Location = new Point(3, 30);
             lblTimer.Name = "lblTimer";
@@ -127,7 +127,7 @@
             // 
             lblOilTemperature.BackColor = Color.Black;
             lblOilTemperature.Dock = DockStyle.Bottom;
-            lblOilTemperature.Font = new Font("Arial", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOilTemperature.Font = new Font("Arial", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblOilTemperature.ForeColor = Color.Yellow;
             lblOilTemperature.Location = new Point(3, 30);
             lblOilTemperature.Name = "lblOilTemperature";

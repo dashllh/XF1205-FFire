@@ -79,7 +79,11 @@ namespace XF1205_FFire
 
         public void Start()
         {
+            // 清零数据采集计时器
+            _counter = 0;
+            // 清空数据采集缓存
             _sensorDataBuffer?.Clear();
+            // 设置采集周期为1秒
             _timer.Change(0, 1000);
         }
 

@@ -122,7 +122,20 @@ namespace XF1205_FFire
                 lblOilTemperature.Text = "8888";
                 lblHeatTime.Text = "8888";
                 lblOilTemperatureDelta.Text = "8888";
+                // 清空曲线数据
                 chartOilTemp.Series[0].Points.Clear();
+                rdoOK1.Checked = false;
+                rdoOK2.Checked = false;
+                rdoOK3.Checked = false;
+                rdoNG1.Checked = false; 
+                rdoNG2.Checked = false;
+                rdoNG3.Checked = false;
+                // 清空试验记录
+                txtNGReason1.Text = string.Empty;
+                txtNGReason2.Text = string.Empty;
+                txtNGReason3.Text = string.Empty;
+                // 设置生成报表按钮无效
+                btnGenerateReport.Enabled = false;
             }));
         }
 
@@ -222,6 +235,11 @@ namespace XF1205_FFire
             // 重置当前温度与前一分钟温度值
             _oilTemperature = 0;
             _oilTempPre = 0;
+            // 重置实时值显示
+            lblHeatTime.Text = "8888";
+            lblOilTemperatureDelta.Text = "8888";
+            // 清空温度曲线数据记录
+            chartOilTemp.Series[0].Points.Clear();
             // 开始记录温度数据
             recorder.Start();
             btnStartHeat.Enabled = false;   
