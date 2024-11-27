@@ -17,7 +17,6 @@ namespace XF1205_FFire
         public TestForm()
         {
             InitializeComponent();
-            _counter = 0;
             recorder = new TestDataRecorder();
             recorder.BindView(this);
             //apparatusOperator = AppData.Data?["Apparatus"] as ApparatusOperator ?? new ApparatusOperator();
@@ -87,6 +86,7 @@ namespace XF1205_FFire
                     // 更新升温计时器显示值
                     lblHeatTime.Text = model.Counter.ToString();
                     // 更新油面温度显示值
+                    _oilTemperature = model.SensorData.OilTemperature;
                     lblOilTemperature.Text = model.SensorData.OilTemperature.ToString("0.0");
                     // 更新温度曲线显示
                     chartOilTemp.Series[0].Points.AddXY(model.Counter, model.SensorData.OilTemperature);
@@ -95,6 +95,11 @@ namespace XF1205_FFire
                     {
                         chartOilTemp.ChartAreas[0].AxisX.Minimum = model.Counter - 300;
                         chartOilTemp.ChartAreas[0].AxisX.Maximum = model.Counter;
+                    }
+                    // 0秒时刻记录前一分钟温度值
+                    if(model.Counter == 0)
+                    {
+                        _oilTempPre = _oilTemperature;
                     }
                     // 按60秒频率更新油面温度变化值
                     if(model.Counter >= 60 && model.Counter % 60 == 0)
@@ -211,14 +216,19 @@ namespace XF1205_FFire
             _counter++;
         }
 
+        // 启动升温计时
         private void btnStartHeat_Click(object sender, EventArgs e)
         {
+            // 重置当前温度与前一分钟温度值
+            _oilTemperature = 0;
+            _oilTempPre = 0;
             // 开始记录温度数据
             recorder.Start();
             btnStartHeat.Enabled = false;   
             btnStopHeat.Enabled = true;
         }
 
+        // 停止升温计时
         private void btnStopHeat_Click(object sender, EventArgs e)
         {
             // 停止温度数据记录

@@ -319,7 +319,7 @@
             btnStartTest.Name = "btnStartTest";
             btnStartTest.Size = new Size(105, 34);
             btnStartTest.TabIndex = 15;
-            btnStartTest.Text = "开始计时";
+            btnStartTest.Text = "开始起火计时";
             btnStartTest.UseVisualStyleBackColor = true;
             btnStartTest.Click += btnStartTest_Click;
             // 
@@ -330,7 +330,7 @@
             btnStopTest.Name = "btnStopTest";
             btnStopTest.Size = new Size(105, 34);
             btnStopTest.TabIndex = 16;
-            btnStopTest.Text = "停止计时";
+            btnStopTest.Text = "停止起火计时";
             btnStopTest.UseVisualStyleBackColor = true;
             btnStopTest.Click += btnStopTest_Click;
             // 
