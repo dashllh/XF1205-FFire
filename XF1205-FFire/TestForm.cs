@@ -113,9 +113,9 @@ namespace XF1205_FFire
         {
             Invoke(new System.Action(() =>
             {
-                lblTimer.Text = "0";
+                lblTimer.Text = "8888";
                 lblOilTemperature.Text = "8888";
-                lblHeatTime.Text = "0";
+                lblHeatTime.Text = "8888";
                 lblOilTemperatureDelta.Text = "8888";
                 chartOilTemp.Series[0].Points.Clear();
             }));
