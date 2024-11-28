@@ -120,6 +120,7 @@
             Controls.Add(btnCalibration);
             Controls.Add(btnNewTest);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
