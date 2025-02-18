@@ -95,13 +95,13 @@
             // 
             lblTimer.BackColor = Color.Black;
             lblTimer.Dock = DockStyle.Bottom;
-            lblTimer.Font = new Font("Arial", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTimer.Font = new Font("Arial", 21.5F, FontStyle.Bold, GraphicsUnit.Point);
             lblTimer.ForeColor = Color.Yellow;
             lblTimer.Location = new Point(3, 30);
             lblTimer.Name = "lblTimer";
             lblTimer.Size = new Size(99, 42);
             lblTimer.TabIndex = 1;
-            lblTimer.Text = "8888";
+            lblTimer.Text = "88888";
             lblTimer.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label1
@@ -127,13 +127,13 @@
             // 
             lblOilTemperature.BackColor = Color.Black;
             lblOilTemperature.Dock = DockStyle.Bottom;
-            lblOilTemperature.Font = new Font("Arial", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOilTemperature.Font = new Font("Arial", 21.5F, FontStyle.Bold, GraphicsUnit.Point);
             lblOilTemperature.ForeColor = Color.Yellow;
             lblOilTemperature.Location = new Point(3, 30);
             lblOilTemperature.Name = "lblOilTemperature";
             lblOilTemperature.Size = new Size(99, 42);
             lblOilTemperature.TabIndex = 1;
-            lblOilTemperature.Text = "8888";
+            lblOilTemperature.Text = "88888";
             lblOilTemperature.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label3
@@ -452,13 +452,13 @@
             // 
             lblHeatTime.BackColor = Color.Black;
             lblHeatTime.Dock = DockStyle.Bottom;
-            lblHeatTime.Font = new Font("Arial", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblHeatTime.Font = new Font("Arial", 21.5F, FontStyle.Bold, GraphicsUnit.Point);
             lblHeatTime.ForeColor = Color.Yellow;
             lblHeatTime.Location = new Point(3, 30);
             lblHeatTime.Name = "lblHeatTime";
             lblHeatTime.Size = new Size(106, 40);
             lblHeatTime.TabIndex = 1;
-            lblHeatTime.Text = "8888";
+            lblHeatTime.Text = "88888";
             lblHeatTime.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label4
@@ -484,13 +484,13 @@
             // 
             lblOilTemperatureDelta.BackColor = Color.Black;
             lblOilTemperatureDelta.Dock = DockStyle.Bottom;
-            lblOilTemperatureDelta.Font = new Font("Arial", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOilTemperatureDelta.Font = new Font("Arial", 21.5F, FontStyle.Bold, GraphicsUnit.Point);
             lblOilTemperatureDelta.ForeColor = Color.Yellow;
             lblOilTemperatureDelta.Location = new Point(3, 30);
             lblOilTemperatureDelta.Name = "lblOilTemperatureDelta";
             lblOilTemperatureDelta.Size = new Size(106, 40);
             lblOilTemperatureDelta.TabIndex = 1;
-            lblOilTemperatureDelta.Text = "8888";
+            lblOilTemperatureDelta.Text = "88888";
             lblOilTemperatureDelta.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label2
