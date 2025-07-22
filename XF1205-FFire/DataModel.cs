@@ -25,9 +25,13 @@ namespace XF1205_FFire
         public bool Result1 { get; set; } = false;
         public bool Result2 { get; set; } = false;
         public bool Result3 { get; set; } = false;
+        public bool FinalResult { get; set; } = false;        
         public string NGReason1 {  get; set; } = string.Empty;
         public string NGReason2 { get; set; } = string.Empty;
         public string NGReason3 { get; set; } = string.Empty;
+        public string NGFinalReason { get; set; } = string.Empty;
+        public string TestAddressOption { get; set; } = string.Empty;
+        public string OtherTestAddress { get; set; } = string.Empty;
 
         public DataModel()
         {            

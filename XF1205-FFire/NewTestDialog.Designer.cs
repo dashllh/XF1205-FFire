@@ -44,6 +44,8 @@
             label5 = new Label();
             label4 = new Label();
             groupBox2 = new GroupBox();
+            label15 = new Label();
+            label14 = new Label();
             txtSamplePrepareTime = new TextBox();
             label6 = new Label();
             groupBox3 = new GroupBox();
@@ -64,11 +66,12 @@
             label7 = new Label();
             btnClearInput = new Button();
             groupBox5 = new GroupBox();
+            txtOtherTestAddress = new TextBox();
+            rdoAddress2 = new RadioButton();
+            rdoAddress1 = new RadioButton();
             txtTestMemo = new TextBox();
             dataModelBindingSource1 = new BindingSource(components);
             dataModelBindingSource2 = new BindingSource(components);
-            label14 = new Label();
-            label15 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataModelBindingSource).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -82,9 +85,10 @@
             // btnConfirm
             // 
             btnConfirm.Anchor = AnchorStyles.None;
-            btnConfirm.Location = new Point(267, 556);
+            btnConfirm.Location = new Point(343, 707);
+            btnConfirm.Margin = new Padding(4);
             btnConfirm.Name = "btnConfirm";
-            btnConfirm.Size = new Size(82, 34);
+            btnConfirm.Size = new Size(105, 40);
             btnConfirm.TabIndex = 14;
             btnConfirm.Text = "确定";
             btnConfirm.UseVisualStyleBackColor = true;
@@ -93,9 +97,10 @@
             // btnCancel
             // 
             btnCancel.Anchor = AnchorStyles.None;
-            btnCancel.Location = new Point(355, 556);
+            btnCancel.Location = new Point(456, 707);
+            btnCancel.Margin = new Padding(4);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(82, 34);
+            btnCancel.Size = new Size(105, 40);
             btnCancel.TabIndex = 15;
             btnCancel.Text = "取消";
             btnCancel.UseVisualStyleBackColor = true;
@@ -104,18 +109,20 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(19, 62);
+            label1.Location = new Point(24, 73);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(59, 17);
+            label1.Size = new Size(73, 20);
             label1.TabIndex = 2;
             label1.Text = "样品编号:";
             // 
             // txtSampleId
             // 
             txtSampleId.DataBindings.Add(new Binding("Text", dataModelBindingSource, "SampleId", true));
-            txtSampleId.Location = new Point(84, 59);
+            txtSampleId.Location = new Point(108, 69);
+            txtSampleId.Margin = new Padding(4);
             txtSampleId.Name = "txtSampleId";
-            txtSampleId.Size = new Size(108, 23);
+            txtSampleId.Size = new Size(138, 27);
             txtSampleId.TabIndex = 3;
             txtSampleId.Leave += txtSampleId_Leave;
             // 
@@ -126,35 +133,39 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(227, 62);
+            label2.Location = new Point(292, 73);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(71, 17);
+            label2.Size = new Size(88, 20);
             label2.TabIndex = 4;
             label2.Text = "样品标识号:";
             // 
             // txtTestId
             // 
             txtTestId.DataBindings.Add(new Binding("Text", dataModelBindingSource, "TestId", true));
-            txtTestId.Location = new Point(304, 59);
+            txtTestId.Location = new Point(391, 69);
+            txtTestId.Margin = new Padding(4);
             txtTestId.Name = "txtTestId";
-            txtTestId.Size = new Size(106, 23);
+            txtTestId.Size = new Size(135, 27);
             txtTestId.TabIndex = 4;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(19, 25);
+            label3.Location = new Point(24, 29);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(59, 17);
+            label3.Size = new Size(73, 20);
             label3.TabIndex = 6;
             label3.Text = "产品名称:";
             // 
             // txtProductName
             // 
             txtProductName.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ProductName", true));
-            txtProductName.Location = new Point(84, 22);
+            txtProductName.Location = new Point(108, 26);
+            txtProductName.Margin = new Padding(4);
             txtProductName.Name = "txtProductName";
-            txtProductName.Size = new Size(326, 23);
+            txtProductName.Size = new Size(418, 27);
             txtProductName.TabIndex = 2;
             // 
             // groupBox1
@@ -163,9 +174,11 @@
             groupBox1.Controls.Add(txtLabTemp);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Location = new Point(15, 14);
+            groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(425, 77);
+            groupBox1.Padding = new Padding(4);
+            groupBox1.Size = new Size(546, 91);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "环境信息";
@@ -173,36 +186,40 @@
             // txtLabHumidity
             // 
             txtLabHumidity.DataBindings.Add(new Binding("Text", dataModelBindingSource, "Humidity", true));
-            txtLabHumidity.Location = new Point(337, 32);
+            txtLabHumidity.Location = new Point(433, 38);
+            txtLabHumidity.Margin = new Padding(4);
             txtLabHumidity.Name = "txtLabHumidity";
-            txtLabHumidity.Size = new Size(73, 23);
+            txtLabHumidity.Size = new Size(93, 27);
             txtLabHumidity.TabIndex = 1;
             txtLabHumidity.TextAlign = HorizontalAlignment.Center;
             // 
             // txtLabTemp
             // 
             txtLabTemp.DataBindings.Add(new Binding("Text", dataModelBindingSource, "LabTemperature", true));
-            txtLabTemp.Location = new Point(118, 32);
+            txtLabTemp.Location = new Point(152, 38);
+            txtLabTemp.Margin = new Padding(4);
             txtLabTemp.Name = "txtLabTemp";
-            txtLabTemp.Size = new Size(74, 23);
+            txtLabTemp.Size = new Size(94, 27);
             txtLabTemp.TabIndex = 0;
             txtLabTemp.TextAlign = HorizontalAlignment.Center;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(241, 35);
+            label5.Location = new Point(310, 41);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(90, 17);
+            label5.Size = new Size(111, 20);
             label5.TabIndex = 10;
             label5.Text = "实验室湿度(%):";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(21, 35);
+            label4.Location = new Point(27, 41);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(91, 17);
+            label4.Size = new Size(113, 20);
             label4.TabIndex = 9;
             label4.Text = "实验室温度(℃):";
             // 
@@ -218,27 +235,57 @@
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(txtSampleId);
-            groupBox2.Location = new Point(12, 95);
+            groupBox2.Location = new Point(15, 112);
+            groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(425, 144);
+            groupBox2.Padding = new Padding(4);
+            groupBox2.Size = new Size(546, 169);
             groupBox2.TabIndex = 9;
             groupBox2.TabStop = false;
             groupBox2.Text = "样品信息";
             // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.FlatStyle = FlatStyle.Flat;
+            label15.ForeColor = Color.Red;
+            label15.Location = new Point(9, 75);
+            label15.Margin = new Padding(4, 0, 4, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(16, 20);
+            label15.TabIndex = 10;
+            label15.Text = "*";
+            label15.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.FlatStyle = FlatStyle.Flat;
+            label14.ForeColor = Color.Red;
+            label14.Location = new Point(275, 75);
+            label14.Margin = new Padding(4, 0, 4, 0);
+            label14.Name = "label14";
+            label14.Size = new Size(16, 20);
+            label14.TabIndex = 9;
+            label14.Text = "*";
+            label14.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // txtSamplePrepareTime
             // 
             txtSamplePrepareTime.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ProductPrepareTime", true));
-            txtSamplePrepareTime.Location = new Point(84, 96);
+            txtSamplePrepareTime.Location = new Point(108, 113);
+            txtSamplePrepareTime.Margin = new Padding(4);
             txtSamplePrepareTime.Name = "txtSamplePrepareTime";
-            txtSamplePrepareTime.Size = new Size(326, 23);
+            txtSamplePrepareTime.Size = new Size(418, 27);
             txtSamplePrepareTime.TabIndex = 5;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(19, 99);
+            label6.Location = new Point(24, 116);
+            label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(59, 17);
+            label6.Size = new Size(73, 20);
             label6.TabIndex = 8;
             label6.Text = "养护时间:";
             // 
@@ -252,9 +299,11 @@
             groupBox3.Controls.Add(label11);
             groupBox3.Controls.Add(txtRptId);
             groupBox3.Controls.Add(label10);
-            groupBox3.Location = new Point(12, 245);
+            groupBox3.Location = new Point(15, 288);
+            groupBox3.Margin = new Padding(4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(425, 116);
+            groupBox3.Padding = new Padding(4);
+            groupBox3.Size = new Size(546, 136);
             groupBox3.TabIndex = 10;
             groupBox3.TabStop = false;
             groupBox3.Text = "试验信息";
@@ -262,68 +311,76 @@
             // txtOperator
             // 
             txtOperator.DataBindings.Add(new Binding("Text", dataModelBindingSource, "Operator", true));
-            txtOperator.Location = new Point(292, 68);
+            txtOperator.Location = new Point(375, 80);
+            txtOperator.Margin = new Padding(4);
             txtOperator.Name = "txtOperator";
-            txtOperator.Size = new Size(118, 23);
+            txtOperator.Size = new Size(151, 27);
             txtOperator.TabIndex = 9;
             // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(227, 71);
+            label13.Location = new Point(292, 84);
+            label13.Margin = new Padding(4, 0, 4, 0);
             label13.Name = "label13";
-            label13.Size = new Size(59, 17);
+            label13.Size = new Size(73, 20);
             label13.TabIndex = 13;
             label13.Text = "试验人员:";
             // 
             // txtTestDate
             // 
             txtTestDate.DataBindings.Add(new Binding("Text", dataModelBindingSource, "TestDate", true));
-            txtTestDate.Location = new Point(292, 30);
+            txtTestDate.Location = new Point(375, 35);
+            txtTestDate.Margin = new Padding(4);
             txtTestDate.Name = "txtTestDate";
-            txtTestDate.Size = new Size(118, 23);
+            txtTestDate.Size = new Size(151, 27);
             txtTestDate.TabIndex = 7;
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(227, 33);
+            label12.Location = new Point(292, 39);
+            label12.Margin = new Padding(4, 0, 4, 0);
             label12.Name = "label12";
-            label12.Size = new Size(59, 17);
+            label12.Size = new Size(73, 20);
             label12.TabIndex = 11;
             label12.Text = "试验日期:";
             // 
             // txtTestAccord
             // 
             txtTestAccord.DataBindings.Add(new Binding("Text", dataModelBindingSource, "TestAccord", true));
-            txtTestAccord.Location = new Point(84, 67);
+            txtTestAccord.Location = new Point(108, 79);
+            txtTestAccord.Margin = new Padding(4);
             txtTestAccord.Name = "txtTestAccord";
-            txtTestAccord.Size = new Size(118, 23);
+            txtTestAccord.Size = new Size(151, 27);
             txtTestAccord.TabIndex = 8;
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(19, 70);
+            label11.Location = new Point(24, 82);
+            label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
-            label11.Size = new Size(59, 17);
+            label11.Size = new Size(73, 20);
             label11.TabIndex = 9;
             label11.Text = "检验依据:";
             // 
             // txtRptId
             // 
             txtRptId.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ReportId", true));
-            txtRptId.Location = new Point(84, 30);
+            txtRptId.Location = new Point(108, 35);
+            txtRptId.Margin = new Padding(4);
             txtRptId.Name = "txtRptId";
-            txtRptId.Size = new Size(118, 23);
+            txtRptId.Size = new Size(151, 27);
             txtRptId.TabIndex = 6;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(19, 33);
+            label10.Location = new Point(24, 39);
+            label10.Margin = new Padding(4, 0, 4, 0);
             label10.Name = "label10";
-            label10.Size = new Size(59, 17);
+            label10.Size = new Size(73, 20);
             label10.TabIndex = 7;
             label10.Text = "报告编号:";
             // 
@@ -335,9 +392,11 @@
             groupBox4.Controls.Add(label8);
             groupBox4.Controls.Add(txtApparatusName);
             groupBox4.Controls.Add(label7);
-            groupBox4.Location = new Point(12, 367);
+            groupBox4.Location = new Point(15, 432);
+            groupBox4.Margin = new Padding(4);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(425, 112);
+            groupBox4.Padding = new Padding(4);
+            groupBox4.Size = new Size(546, 132);
             groupBox4.TabIndex = 11;
             groupBox4.TabStop = false;
             groupBox4.Text = "设备信息";
@@ -345,60 +404,67 @@
             // txtApparatusCheckDate
             // 
             txtApparatusCheckDate.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ApparatusCheckDate", true));
-            txtApparatusCheckDate.Location = new Point(84, 66);
+            txtApparatusCheckDate.Location = new Point(108, 78);
+            txtApparatusCheckDate.Margin = new Padding(4);
             txtApparatusCheckDate.Name = "txtApparatusCheckDate";
-            txtApparatusCheckDate.Size = new Size(326, 23);
+            txtApparatusCheckDate.Size = new Size(418, 27);
             txtApparatusCheckDate.TabIndex = 12;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(19, 69);
+            label9.Location = new Point(24, 81);
+            label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
-            label9.Size = new Size(59, 17);
+            label9.Size = new Size(73, 20);
             label9.TabIndex = 14;
             label9.Text = "检定日期:";
             // 
             // txtApparatusId
             // 
             txtApparatusId.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ApparatusId", true));
-            txtApparatusId.Location = new Point(325, 30);
+            txtApparatusId.Location = new Point(418, 35);
+            txtApparatusId.Margin = new Padding(4);
             txtApparatusId.Name = "txtApparatusId";
-            txtApparatusId.Size = new Size(85, 23);
+            txtApparatusId.Size = new Size(108, 27);
             txtApparatusId.TabIndex = 11;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(260, 33);
+            label8.Location = new Point(334, 39);
+            label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new Size(59, 17);
+            label8.Size = new Size(73, 20);
             label8.TabIndex = 12;
             label8.Text = "设备编号:";
             // 
             // txtApparatusName
             // 
             txtApparatusName.DataBindings.Add(new Binding("Text", dataModelBindingSource, "ApparatusName", true));
-            txtApparatusName.Location = new Point(84, 30);
+            txtApparatusName.Location = new Point(108, 35);
+            txtApparatusName.Margin = new Padding(4);
             txtApparatusName.Name = "txtApparatusName";
-            txtApparatusName.Size = new Size(170, 23);
+            txtApparatusName.Size = new Size(217, 27);
             txtApparatusName.TabIndex = 10;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(19, 33);
+            label7.Location = new Point(24, 39);
+            label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(59, 17);
+            label7.Size = new Size(73, 20);
             label7.TabIndex = 10;
             label7.Text = "设备名称:";
             // 
             // btnClearInput
             // 
             btnClearInput.Anchor = AnchorStyles.None;
-            btnClearInput.Location = new Point(12, 556);
+            btnClearInput.Location = new Point(15, 707);
+            btnClearInput.Margin = new Padding(4);
             btnClearInput.Name = "btnClearInput";
-            btnClearInput.Size = new Size(82, 34);
+            btnClearInput.Size = new Size(105, 40);
             btnClearInput.TabIndex = 16;
             btnClearInput.Text = "重置输入";
             btnClearInput.UseVisualStyleBackColor = true;
@@ -406,21 +472,59 @@
             // 
             // groupBox5
             // 
+            groupBox5.Controls.Add(txtOtherTestAddress);
+            groupBox5.Controls.Add(rdoAddress2);
+            groupBox5.Controls.Add(rdoAddress1);
             groupBox5.Controls.Add(txtTestMemo);
-            groupBox5.Location = new Point(12, 485);
+            groupBox5.Location = new Point(15, 571);
+            groupBox5.Margin = new Padding(4);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(425, 61);
+            groupBox5.Padding = new Padding(4);
+            groupBox5.Size = new Size(546, 119);
             groupBox5.TabIndex = 13;
             groupBox5.TabStop = false;
-            groupBox5.Text = "备注";
+            groupBox5.Text = "检验地点";
+            // 
+            // txtOtherTestAddress
+            // 
+            txtOtherTestAddress.Enabled = false;
+            txtOtherTestAddress.Location = new Point(118, 69);
+            txtOtherTestAddress.Name = "txtOtherTestAddress";
+            txtOtherTestAddress.Size = new Size(408, 27);
+            txtOtherTestAddress.TabIndex = 16;
+            // 
+            // rdoAddress2
+            // 
+            rdoAddress2.AutoSize = true;
+            rdoAddress2.Location = new Point(39, 70);
+            rdoAddress2.Name = "rdoAddress2";
+            rdoAddress2.Size = new Size(68, 24);
+            rdoAddress2.TabIndex = 15;
+            rdoAddress2.Text = "其他 :";
+            rdoAddress2.UseVisualStyleBackColor = true;
+            rdoAddress2.CheckedChanged += rdoAddress2_CheckedChanged;
+            // 
+            // rdoAddress1
+            // 
+            rdoAddress1.AutoSize = true;
+            rdoAddress1.Checked = true;
+            rdoAddress1.Location = new Point(39, 33);
+            rdoAddress1.Name = "rdoAddress1";
+            rdoAddress1.Size = new Size(222, 24);
+            rdoAddress1.TabIndex = 14;
+            rdoAddress1.TabStop = true;
+            rdoAddress1.Text = "四川省都江堰市学府路358号";
+            rdoAddress1.UseVisualStyleBackColor = true;
             // 
             // txtTestMemo
             // 
             txtTestMemo.DataBindings.Add(new Binding("Text", dataModelBindingSource, "Memo", true));
-            txtTestMemo.Location = new Point(19, 22);
+            txtTestMemo.Location = new Point(470, 32);
+            txtTestMemo.Margin = new Padding(4);
             txtTestMemo.Name = "txtTestMemo";
-            txtTestMemo.Size = new Size(389, 23);
+            txtTestMemo.Size = new Size(29, 27);
             txtTestMemo.TabIndex = 13;
+            txtTestMemo.Visible = false;
             // 
             // dataModelBindingSource1
             // 
@@ -430,35 +534,11 @@
             // 
             dataModelBindingSource2.DataSource = typeof(DataModel);
             // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.FlatStyle = FlatStyle.Flat;
-            label14.ForeColor = Color.Red;
-            label14.Location = new Point(214, 64);
-            label14.Name = "label14";
-            label14.Size = new Size(13, 17);
-            label14.TabIndex = 9;
-            label14.Text = "*";
-            label14.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.FlatStyle = FlatStyle.Flat;
-            label15.ForeColor = Color.Red;
-            label15.Location = new Point(7, 64);
-            label15.Name = "label15";
-            label15.Size = new Size(13, 17);
-            label15.TabIndex = 10;
-            label15.Text = "*";
-            label15.TextAlign = ContentAlignment.MiddleRight;
-            // 
             // NewTestDialog
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(450, 602);
+            ClientSize = new Size(579, 765);
             Controls.Add(groupBox5);
             Controls.Add(btnClearInput);
             Controls.Add(groupBox4);
@@ -468,6 +548,7 @@
             Controls.Add(btnCancel);
             Controls.Add(btnConfirm);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "NewTestDialog";
@@ -533,5 +614,8 @@
         private BindingSource dataModelBindingSource2;
         private Label label14;
         private Label label15;
+        private TextBox txtOtherTestAddress;
+        private RadioButton rdoAddress2;
+        private RadioButton rdoAddress1;
     }
 }

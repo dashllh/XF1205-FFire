@@ -29,6 +29,14 @@ namespace XF1205_FFire
                 return;
             }
 
+            if (rdoAddress2.Checked && txtOtherTestAddress.Text.Trim() == string.Empty)
+            {
+                // 提示用户输入试验地址
+                MessageBox.Show("请输入其他试验地点。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtOtherTestAddress.Focus();
+                return;
+            }
+
             double tmp = 0;
             DateTime tmpDate = DateTime.Now;
             Close();
@@ -49,7 +57,7 @@ namespace XF1205_FFire
                 // 试验信息
                 dataModel.ReportId = txtRptId.Text;
                 dataModel.TestAccord = txtTestAccord.Text;
-                if(DateTime.TryParse(txtTestDate.Text,out tmpDate))
+                if (DateTime.TryParse(txtTestDate.Text, out tmpDate))
                     dataModel.TestDate = tmpDate;
                 dataModel.Operator = txtOperator.Text;
                 // 设备信息
@@ -57,7 +65,18 @@ namespace XF1205_FFire
                 dataModel.ApparatusId = txtApparatusId.Text;
                 dataModel.ApparatusName = txtApparatusName.Text;
                 // 备注
-                dataModel.Memo = txtTestMemo.Text;
+                //dataModel.Memo = txtTestMemo.Text;
+                // 试验地址
+                if (rdoAddress1.Checked)
+                {
+                    dataModel.TestAddressOption = "1";
+                    dataModel.OtherTestAddress = string.Empty;
+                }
+                if (rdoAddress2.Checked)
+                {
+                    dataModel.TestAddressOption = "2";
+                    dataModel.OtherTestAddress = txtOtherTestAddress.Text;
+                }
             }
             TestForm frmTestForm = new TestForm();
             frmTestForm.Show();
@@ -102,6 +121,11 @@ namespace XF1205_FFire
             txtSamplePrepareTime.Text = string.Empty;
             txtOperator.Text = string.Empty;
             txtTestMemo.Text = string.Empty;
+        }
+
+        private void rdoAddress2_CheckedChanged(object sender, EventArgs e)
+        {
+            txtOtherTestAddress.Enabled = rdoAddress2.Checked;
         }
     }
 }

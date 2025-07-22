@@ -62,6 +62,7 @@ namespace XF1205_FFire
             {
                 btnOpenValve.Enabled = false;
                 btnCloseValve.Enabled = true;
+                btnCloseValve.Focus();
             }
         }
 
@@ -73,6 +74,7 @@ namespace XF1205_FFire
             {
                 btnOpenValve.Enabled = true;
                 btnCloseValve.Enabled = false;
+                btnOpenValve.Focus();
             }
         }
 
@@ -97,12 +99,12 @@ namespace XF1205_FFire
                         chartOilTemp.ChartAreas[0].AxisX.Maximum = model.Counter;
                     }
                     // 0秒时刻记录前一分钟温度值
-                    if(model.Counter == 0)
+                    if (model.Counter == 0)
                     {
                         _oilTempPre = _oilTemperature;
                     }
                     // 按60秒频率更新油面温度变化值
-                    if(model.Counter >= 60 && model.Counter % 60 == 0)
+                    if (model.Counter >= 60 && model.Counter % 60 == 0)
                     {
                         lblOilTemperatureDelta.Text = ((_oilTemperature - _oilTempPre).ToString("0.0"));
                         // 保存当前油面温度为上一分钟的温度
@@ -125,15 +127,18 @@ namespace XF1205_FFire
                 // 清空曲线数据
                 chartOilTemp.Series[0].Points.Clear();
                 rdoOK1.Checked = false;
+                rdoNG1.Checked = false;
                 rdoOK2.Checked = false;
-                rdoOK3.Checked = false;
-                rdoNG1.Checked = false; 
                 rdoNG2.Checked = false;
+                rdoOK3.Checked = false;
                 rdoNG3.Checked = false;
+                rdoOKFinalResult.Checked = false;
+                rdoNGFinalResult.Checked = false;
                 // 清空试验记录
                 txtNGReason1.Text = string.Empty;
                 txtNGReason2.Text = string.Empty;
                 txtNGReason3.Text = string.Empty;
+                txtNGReasonFinalResult.Text = string.Empty;
                 // 设置生成报表按钮无效
                 btnGenerateReport.Enabled = false;
             }));
@@ -141,6 +146,12 @@ namespace XF1205_FFire
 
         private void btnGenerateReport_Click(object sender, EventArgs e)
         {
+            // 检查试验记录及结论是否录入完整
+            if(!rdoOKFinalResult.Checked && !rdoNGFinalResult.Checked)
+            {
+                MessageBox.Show("请录入试验结论!", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             recorder.OutputTestData();
         }
 
@@ -197,6 +208,31 @@ namespace XF1205_FFire
             }
         }
 
+        private void rdoOKFinalResult_CheckedChanged(object sender, EventArgs e)
+        {
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null)
+            {
+                dataModel.FinalResult = rdoOKFinalResult.Checked ? true : false;
+            }
+            if(rdoOKFinalResult.Checked)
+            {
+                txtNGReasonFinalResult.Enabled = false;
+            }
+        }
+        private void rdoNGFinalResult_CheckedChanged(object sender, EventArgs e)
+        {
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null)
+            {
+                dataModel.FinalResult = rdoNGFinalResult.Checked ? false : true;
+            }
+            if (rdoNGFinalResult.Checked)
+            {
+                txtNGReasonFinalResult.Enabled = true;
+            }
+        }
+
         private void txtNGReason1_Leave(object sender, EventArgs e)
         {
             DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
@@ -223,6 +259,15 @@ namespace XF1205_FFire
                 dataModel.NGReason3 = txtNGReason3.Text;
             }
         }
+        private void txtNGReasonFinalResult_Leave(object sender, EventArgs e)
+        {
+            // 保存最终结果的NG原因
+            DataModel? dataModel = AppData.Data?["TestData"] as DataModel;
+            if (dataModel != null)
+            {
+                dataModel.NGFinalReason = txtNGReasonFinalResult.Text;
+            }
+        }
         private void timer_counting_Tick(object sender, EventArgs e)
         {
             lblTimer.Text = _counter.ToString();
@@ -242,8 +287,9 @@ namespace XF1205_FFire
             chartOilTemp.Series[0].Points.Clear();
             // 开始记录温度数据
             recorder.Start();
-            btnStartHeat.Enabled = false;   
+            btnStartHeat.Enabled = false;
             btnStopHeat.Enabled = true;
+            btnStopHeat.Focus();
         }
 
         // 停止升温计时
@@ -253,6 +299,7 @@ namespace XF1205_FFire
             recorder.Stop();
             btnStartHeat.Enabled = true;
             btnStopHeat.Enabled = false;
-        }
+            btnStartHeat.Focus();
+        }        
     }
 }

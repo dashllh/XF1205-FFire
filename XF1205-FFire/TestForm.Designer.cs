@@ -48,12 +48,12 @@
             panel1 = new Panel();
             rdoNG1 = new RadioButton();
             rdoOK1 = new RadioButton();
-            txtNGReason3 = new TextBox();
-            txtNGReason2 = new TextBox();
-            txtNGReason1 = new TextBox();
             label16 = new Label();
             label15 = new Label();
             label14 = new Label();
+            txtNGReason3 = new TextBox();
+            txtNGReason2 = new TextBox();
+            txtNGReason1 = new TextBox();
             btnStartTest = new Button();
             btnStopTest = new Button();
             chartOilTemp = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -70,6 +70,10 @@
             label2 = new Label();
             btnStartHeat = new Button();
             btnStopHeat = new Button();
+            groupBox5 = new GroupBox();
+            txtNGReasonFinalResult = new TextBox();
+            rdoNGFinalResult = new RadioButton();
+            rdoOKFinalResult = new RadioButton();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox6.SuspendLayout();
@@ -79,15 +83,18 @@
             ((System.ComponentModel.ISupportInitialize)chartOilTemp).BeginInit();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
+            groupBox5.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(lblTimer);
             groupBox1.Controls.Add(label1);
-            groupBox1.Location = new Point(24, 19);
+            groupBox1.Location = new Point(31, 22);
+            groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(105, 75);
+            groupBox1.Padding = new Padding(4);
+            groupBox1.Size = new Size(135, 88);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
@@ -97,9 +104,10 @@
             lblTimer.Dock = DockStyle.Bottom;
             lblTimer.Font = new Font("Arial", 21.5F, FontStyle.Bold, GraphicsUnit.Point);
             lblTimer.ForeColor = Color.Yellow;
-            lblTimer.Location = new Point(3, 30);
+            lblTimer.Location = new Point(4, 35);
+            lblTimer.Margin = new Padding(4, 0, 4, 0);
             lblTimer.Name = "lblTimer";
-            lblTimer.Size = new Size(99, 42);
+            lblTimer.Size = new Size(127, 49);
             lblTimer.TabIndex = 1;
             lblTimer.Text = "88888";
             lblTimer.TextAlign = ContentAlignment.MiddleCenter;
@@ -107,9 +115,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(5, 12);
+            label1.Location = new Point(6, 14);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(70, 17);
+            label1.Size = new Size(86, 20);
             label1.TabIndex = 0;
             label1.Text = "试验计时(s)";
             // 
@@ -117,9 +126,11 @@
             // 
             groupBox2.Controls.Add(lblOilTemperature);
             groupBox2.Controls.Add(label3);
-            groupBox2.Location = new Point(24, 100);
+            groupBox2.Location = new Point(31, 118);
+            groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(105, 75);
+            groupBox2.Padding = new Padding(4);
+            groupBox2.Size = new Size(135, 88);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             // 
@@ -129,9 +140,10 @@
             lblOilTemperature.Dock = DockStyle.Bottom;
             lblOilTemperature.Font = new Font("Arial", 21.5F, FontStyle.Bold, GraphicsUnit.Point);
             lblOilTemperature.ForeColor = Color.Yellow;
-            lblOilTemperature.Location = new Point(3, 30);
+            lblOilTemperature.Location = new Point(4, 35);
+            lblOilTemperature.Margin = new Padding(4, 0, 4, 0);
             lblOilTemperature.Name = "lblOilTemperature";
-            lblOilTemperature.Size = new Size(99, 42);
+            lblOilTemperature.Size = new Size(127, 49);
             lblOilTemperature.TabIndex = 1;
             lblOilTemperature.Text = "88888";
             lblOilTemperature.TextAlign = ContentAlignment.MiddleCenter;
@@ -139,9 +151,10 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(5, 12);
+            label3.Location = new Point(6, 14);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(76, 17);
+            label3.Size = new Size(94, 20);
             label3.TabIndex = 0;
             label3.Text = "油面温度(℃)";
             // 
@@ -150,15 +163,14 @@
             groupBox6.Controls.Add(panel3);
             groupBox6.Controls.Add(panel2);
             groupBox6.Controls.Add(panel1);
-            groupBox6.Controls.Add(txtNGReason3);
-            groupBox6.Controls.Add(txtNGReason2);
-            groupBox6.Controls.Add(txtNGReason1);
             groupBox6.Controls.Add(label16);
             groupBox6.Controls.Add(label15);
             groupBox6.Controls.Add(label14);
-            groupBox6.Location = new Point(27, 397);
+            groupBox6.Location = new Point(35, 467);
+            groupBox6.Margin = new Padding(4);
             groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(824, 136);
+            groupBox6.Padding = new Padding(4);
+            groupBox6.Size = new Size(730, 160);
             groupBox6.TabIndex = 14;
             groupBox6.TabStop = false;
             groupBox6.Text = "试验记录";
@@ -167,31 +179,32 @@
             // 
             panel3.Controls.Add(rdoNG3);
             panel3.Controls.Add(rdoOK3);
-            panel3.Location = new Point(261, 98);
+            panel3.Location = new Point(484, 117);
+            panel3.Margin = new Padding(4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(243, 32);
+            panel3.Size = new Size(221, 38);
             panel3.TabIndex = 14;
             // 
             // rdoNG3
             // 
             rdoNG3.AutoSize = true;
-            rdoNG3.Location = new Point(90, 6);
+            rdoNG3.Location = new Point(116, 7);
+            rdoNG3.Margin = new Padding(4);
             rdoNG3.Name = "rdoNG3";
-            rdoNG3.Size = new Size(149, 21);
+            rdoNG3.Size = new Size(105, 24);
             rdoNG3.TabIndex = 10;
-            rdoNG3.TabStop = true;
-            rdoNG3.Text = "不符合要求，补充说明:";
+            rdoNG3.Text = "不符合要求";
             rdoNG3.UseVisualStyleBackColor = true;
             rdoNG3.CheckedChanged += rdoNG3_CheckedChanged;
             // 
             // rdoOK3
             // 
             rdoOK3.AutoSize = true;
-            rdoOK3.Location = new Point(9, 6);
+            rdoOK3.Location = new Point(12, 7);
+            rdoOK3.Margin = new Padding(4);
             rdoOK3.Name = "rdoOK3";
-            rdoOK3.Size = new Size(74, 21);
+            rdoOK3.Size = new Size(90, 24);
             rdoOK3.TabIndex = 9;
-            rdoOK3.TabStop = true;
             rdoOK3.Text = "符合要求";
             rdoOK3.UseVisualStyleBackColor = true;
             rdoOK3.CheckedChanged += rdoOK3_CheckedChanged;
@@ -200,31 +213,32 @@
             // 
             panel2.Controls.Add(rdoNG2);
             panel2.Controls.Add(rdoOK2);
-            panel2.Location = new Point(262, 65);
+            panel2.Location = new Point(485, 78);
+            panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(242, 27);
+            panel2.Size = new Size(220, 32);
             panel2.TabIndex = 13;
             // 
             // rdoNG2
             // 
             rdoNG2.AutoSize = true;
-            rdoNG2.Location = new Point(89, 3);
+            rdoNG2.Location = new Point(114, 4);
+            rdoNG2.Margin = new Padding(4);
             rdoNG2.Name = "rdoNG2";
-            rdoNG2.Size = new Size(149, 21);
+            rdoNG2.Size = new Size(105, 24);
             rdoNG2.TabIndex = 9;
-            rdoNG2.TabStop = true;
-            rdoNG2.Text = "不符合要求，补充说明:";
+            rdoNG2.Text = "不符合要求";
             rdoNG2.UseVisualStyleBackColor = true;
             rdoNG2.CheckedChanged += rdoNG2_CheckedChanged;
             // 
             // rdoOK2
             // 
             rdoOK2.AutoSize = true;
-            rdoOK2.Location = new Point(8, 3);
+            rdoOK2.Location = new Point(10, 4);
+            rdoOK2.Margin = new Padding(4);
             rdoOK2.Name = "rdoOK2";
-            rdoOK2.Size = new Size(74, 21);
+            rdoOK2.Size = new Size(90, 24);
             rdoOK2.TabIndex = 8;
-            rdoOK2.TabStop = true;
             rdoOK2.Text = "符合要求";
             rdoOK2.UseVisualStyleBackColor = true;
             rdoOK2.CheckedChanged += rdoOK2_CheckedChanged;
@@ -233,91 +247,102 @@
             // 
             panel1.Controls.Add(rdoNG1);
             panel1.Controls.Add(rdoOK1);
-            panel1.Location = new Point(262, 24);
+            panel1.Location = new Point(485, 30);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(242, 35);
+            panel1.Size = new Size(220, 41);
             panel1.TabIndex = 12;
             // 
             // rdoNG1
             // 
             rdoNG1.AutoSize = true;
-            rdoNG1.Location = new Point(88, 7);
+            rdoNG1.Location = new Point(113, 8);
+            rdoNG1.Margin = new Padding(4);
             rdoNG1.Name = "rdoNG1";
-            rdoNG1.Size = new Size(149, 21);
+            rdoNG1.Size = new Size(105, 24);
             rdoNG1.TabIndex = 8;
-            rdoNG1.TabStop = true;
-            rdoNG1.Text = "不符合要求，补充说明:";
+            rdoNG1.Text = "不符合要求";
             rdoNG1.UseVisualStyleBackColor = true;
             rdoNG1.CheckedChanged += rdoNG1_CheckedChanged;
             // 
             // rdoOK1
             // 
             rdoOK1.AutoSize = true;
-            rdoOK1.Location = new Point(8, 7);
+            rdoOK1.Location = new Point(10, 8);
+            rdoOK1.Margin = new Padding(4);
             rdoOK1.Name = "rdoOK1";
-            rdoOK1.Size = new Size(74, 21);
+            rdoOK1.Size = new Size(90, 24);
             rdoOK1.TabIndex = 7;
-            rdoOK1.TabStop = true;
             rdoOK1.Text = "符合要求";
             rdoOK1.UseVisualStyleBackColor = true;
             rdoOK1.CheckedChanged += rdoOK1_CheckedChanged;
             // 
-            // txtNGReason3
-            // 
-            txtNGReason3.Location = new Point(510, 104);
-            txtNGReason3.Name = "txtNGReason3";
-            txtNGReason3.Size = new Size(300, 23);
-            txtNGReason3.TabIndex = 11;
-            txtNGReason3.Leave += txtNGReason3_Leave;
-            // 
-            // txtNGReason2
-            // 
-            txtNGReason2.Location = new Point(510, 68);
-            txtNGReason2.Name = "txtNGReason2";
-            txtNGReason2.Size = new Size(300, 23);
-            txtNGReason2.TabIndex = 10;
-            txtNGReason2.Leave += txtNGReason2_Leave;
-            // 
-            // txtNGReason1
-            // 
-            txtNGReason1.Location = new Point(510, 31);
-            txtNGReason1.Name = "txtNGReason1";
-            txtNGReason1.Size = new Size(300, 23);
-            txtNGReason1.TabIndex = 9;
-            txtNGReason1.Leave += txtNGReason1_Leave;
-            // 
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(21, 105);
+            label16.Location = new Point(27, 124);
+            label16.Margin = new Padding(4, 0, 4, 0);
             label16.Name = "label16";
-            label16.Size = new Size(240, 17);
+            label16.Size = new Size(300, 20);
             label16.TabIndex = 2;
             label16.Text = "移开灭火毯后3min内油盘中残油不再自燃。";
             // 
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(21, 70);
+            label15.Location = new Point(27, 82);
+            label15.Margin = new Padding(4, 0, 4, 0);
             label15.Name = "label15";
-            label15.Size = new Size(248, 17);
+            label15.Size = new Size(309, 20);
             label15.TabIndex = 1;
             label15.Text = "移开灭火毯后看不到火焰且油盘中还有残油。";
             // 
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(21, 33);
+            label14.Location = new Point(27, 39);
+            label14.Margin = new Padding(4, 0, 4, 0);
             label14.Name = "label14";
-            label14.Size = new Size(248, 17);
+            label14.Size = new Size(453, 20);
             label14.TabIndex = 0;
-            label14.Text = "在试验过程中，灭火毯保持完整，不被烧穿。";
+            label14.Text = "灭火毯应能扑灭F类火; 在试验过程中, 灭火毯应保持完整不被烧穿。";
+            // 
+            // txtNGReason3
+            // 
+            txtNGReason3.Location = new Point(1124, 438);
+            txtNGReason3.Margin = new Padding(4);
+            txtNGReason3.Name = "txtNGReason3";
+            txtNGReason3.Size = new Size(45, 27);
+            txtNGReason3.TabIndex = 11;
+            txtNGReason3.Visible = false;
+            txtNGReason3.Leave += txtNGReason3_Leave;
+            // 
+            // txtNGReason2
+            // 
+            txtNGReason2.Location = new Point(1124, 396);
+            txtNGReason2.Margin = new Padding(4);
+            txtNGReason2.Name = "txtNGReason2";
+            txtNGReason2.Size = new Size(45, 27);
+            txtNGReason2.TabIndex = 10;
+            txtNGReason2.Visible = false;
+            txtNGReason2.Leave += txtNGReason2_Leave;
+            // 
+            // txtNGReason1
+            // 
+            txtNGReason1.Location = new Point(1124, 352);
+            txtNGReason1.Margin = new Padding(4);
+            txtNGReason1.Name = "txtNGReason1";
+            txtNGReason1.Size = new Size(45, 27);
+            txtNGReason1.TabIndex = 9;
+            txtNGReason1.Visible = false;
+            txtNGReason1.Leave += txtNGReason1_Leave;
             // 
             // btnStartTest
             // 
-            btnStartTest.Location = new Point(24, 193);
+            btnStartTest.Location = new Point(31, 227);
+            btnStartTest.Margin = new Padding(4);
             btnStartTest.Name = "btnStartTest";
-            btnStartTest.Size = new Size(105, 34);
+            btnStartTest.Size = new Size(135, 40);
             btnStartTest.TabIndex = 15;
             btnStartTest.Text = "开始起火计时";
             btnStartTest.UseVisualStyleBackColor = true;
@@ -326,9 +351,10 @@
             // btnStopTest
             // 
             btnStopTest.Enabled = false;
-            btnStopTest.Location = new Point(24, 243);
+            btnStopTest.Location = new Point(31, 286);
+            btnStopTest.Margin = new Padding(4);
             btnStopTest.Name = "btnStopTest";
-            btnStopTest.Size = new Size(105, 34);
+            btnStopTest.Size = new Size(135, 40);
             btnStopTest.TabIndex = 16;
             btnStopTest.Text = "停止起火计时";
             btnStopTest.UseVisualStyleBackColor = true;
@@ -375,7 +401,8 @@
             legend1.TableStyle = System.Windows.Forms.DataVisualization.Charting.LegendTableStyle.Wide;
             legend1.TitleForeColor = Color.Transparent;
             chartOilTemp.Legends.Add(legend1);
-            chartOilTemp.Location = new Point(149, 29);
+            chartOilTemp.Location = new Point(192, 34);
+            chartOilTemp.Margin = new Padding(4);
             chartOilTemp.Name = "chartOilTemp";
             series1.BorderColor = Color.Transparent;
             series1.ChartArea = "ChartArea1";
@@ -387,15 +414,16 @@
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             chartOilTemp.Series.Add(series1);
-            chartOilTemp.Size = new Size(702, 348);
+            chartOilTemp.Size = new Size(903, 409);
             chartOilTemp.TabIndex = 17;
             chartOilTemp.Text = "chart1";
             // 
             // btnOpenValve
             // 
-            btnOpenValve.Location = new Point(24, 293);
+            btnOpenValve.Location = new Point(31, 345);
+            btnOpenValve.Margin = new Padding(4);
             btnOpenValve.Name = "btnOpenValve";
-            btnOpenValve.Size = new Size(105, 34);
+            btnOpenValve.Size = new Size(135, 40);
             btnOpenValve.TabIndex = 18;
             btnOpenValve.Text = "打开燃气阀";
             btnOpenValve.UseVisualStyleBackColor = true;
@@ -404,9 +432,10 @@
             // btnCloseValve
             // 
             btnCloseValve.Enabled = false;
-            btnCloseValve.Location = new Point(24, 343);
+            btnCloseValve.Location = new Point(31, 404);
+            btnCloseValve.Margin = new Padding(4);
             btnCloseValve.Name = "btnCloseValve";
-            btnCloseValve.Size = new Size(105, 34);
+            btnCloseValve.Size = new Size(135, 40);
             btnCloseValve.TabIndex = 19;
             btnCloseValve.Text = "关闭燃气阀";
             btnCloseValve.UseVisualStyleBackColor = true;
@@ -415,9 +444,10 @@
             // btnGenerateReport
             // 
             btnGenerateReport.Enabled = false;
-            btnGenerateReport.Location = new Point(872, 428);
+            btnGenerateReport.Location = new Point(1121, 504);
+            btnGenerateReport.Margin = new Padding(4);
             btnGenerateReport.Name = "btnGenerateReport";
-            btnGenerateReport.Size = new Size(104, 42);
+            btnGenerateReport.Size = new Size(134, 49);
             btnGenerateReport.TabIndex = 20;
             btnGenerateReport.Text = "生成试验报告";
             btnGenerateReport.UseVisualStyleBackColor = true;
@@ -425,9 +455,10 @@
             // 
             // btnCloseWindow
             // 
-            btnCloseWindow.Location = new Point(872, 482);
+            btnCloseWindow.Location = new Point(1121, 567);
+            btnCloseWindow.Margin = new Padding(4);
             btnCloseWindow.Name = "btnCloseWindow";
-            btnCloseWindow.Size = new Size(104, 42);
+            btnCloseWindow.Size = new Size(134, 49);
             btnCloseWindow.TabIndex = 21;
             btnCloseWindow.Text = "关闭";
             btnCloseWindow.UseVisualStyleBackColor = true;
@@ -442,9 +473,11 @@
             // 
             groupBox3.Controls.Add(lblHeatTime);
             groupBox3.Controls.Add(label4);
-            groupBox3.Location = new Point(868, 20);
+            groupBox3.Location = new Point(1116, 24);
+            groupBox3.Margin = new Padding(4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(112, 73);
+            groupBox3.Padding = new Padding(4);
+            groupBox3.Size = new Size(144, 86);
             groupBox3.TabIndex = 22;
             groupBox3.TabStop = false;
             // 
@@ -454,9 +487,10 @@
             lblHeatTime.Dock = DockStyle.Bottom;
             lblHeatTime.Font = new Font("Arial", 21.5F, FontStyle.Bold, GraphicsUnit.Point);
             lblHeatTime.ForeColor = Color.Yellow;
-            lblHeatTime.Location = new Point(3, 30);
+            lblHeatTime.Location = new Point(4, 35);
+            lblHeatTime.Margin = new Padding(4, 0, 4, 0);
             lblHeatTime.Name = "lblHeatTime";
-            lblHeatTime.Size = new Size(106, 40);
+            lblHeatTime.Size = new Size(136, 47);
             lblHeatTime.TabIndex = 1;
             lblHeatTime.Text = "88888";
             lblHeatTime.TextAlign = ContentAlignment.MiddleCenter;
@@ -464,9 +498,10 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(6, 11);
+            label4.Location = new Point(8, 13);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(70, 17);
+            label4.Size = new Size(86, 20);
             label4.TabIndex = 0;
             label4.Text = "升温计时(s)";
             // 
@@ -474,9 +509,11 @@
             // 
             groupBox4.Controls.Add(lblOilTemperatureDelta);
             groupBox4.Controls.Add(label2);
-            groupBox4.Location = new Point(868, 99);
+            groupBox4.Location = new Point(1116, 116);
+            groupBox4.Margin = new Padding(4);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(112, 73);
+            groupBox4.Padding = new Padding(4);
+            groupBox4.Size = new Size(144, 86);
             groupBox4.TabIndex = 23;
             groupBox4.TabStop = false;
             // 
@@ -486,9 +523,10 @@
             lblOilTemperatureDelta.Dock = DockStyle.Bottom;
             lblOilTemperatureDelta.Font = new Font("Arial", 21.5F, FontStyle.Bold, GraphicsUnit.Point);
             lblOilTemperatureDelta.ForeColor = Color.Yellow;
-            lblOilTemperatureDelta.Location = new Point(3, 30);
+            lblOilTemperatureDelta.Location = new Point(4, 35);
+            lblOilTemperatureDelta.Margin = new Padding(4, 0, 4, 0);
             lblOilTemperatureDelta.Name = "lblOilTemperatureDelta";
-            lblOilTemperatureDelta.Size = new Size(106, 40);
+            lblOilTemperatureDelta.Size = new Size(136, 47);
             lblOilTemperatureDelta.TabIndex = 1;
             lblOilTemperatureDelta.Text = "88888";
             lblOilTemperatureDelta.TextAlign = ContentAlignment.MiddleCenter;
@@ -496,17 +534,19 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(6, 11);
+            label2.Location = new Point(8, 13);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(102, 17);
+            label2.Size = new Size(127, 20);
             label2.TabIndex = 0;
             label2.Text = "升温速率(℃/min)";
             // 
             // btnStartHeat
             // 
-            btnStartHeat.Location = new Point(872, 193);
+            btnStartHeat.Location = new Point(1121, 227);
+            btnStartHeat.Margin = new Padding(4);
             btnStartHeat.Name = "btnStartHeat";
-            btnStartHeat.Size = new Size(105, 34);
+            btnStartHeat.Size = new Size(135, 40);
             btnStartHeat.TabIndex = 24;
             btnStartHeat.Text = "开始升温计时";
             btnStartHeat.UseVisualStyleBackColor = true;
@@ -515,24 +555,73 @@
             // btnStopHeat
             // 
             btnStopHeat.Enabled = false;
-            btnStopHeat.Location = new Point(872, 243);
+            btnStopHeat.Location = new Point(1121, 286);
+            btnStopHeat.Margin = new Padding(4);
             btnStopHeat.Name = "btnStopHeat";
-            btnStopHeat.Size = new Size(105, 34);
+            btnStopHeat.Size = new Size(135, 40);
             btnStopHeat.TabIndex = 25;
             btnStopHeat.Text = "停止升温计时";
             btnStopHeat.UseVisualStyleBackColor = true;
             btnStopHeat.Click += btnStopHeat_Click;
             // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(txtNGReasonFinalResult);
+            groupBox5.Controls.Add(rdoNGFinalResult);
+            groupBox5.Controls.Add(rdoOKFinalResult);
+            groupBox5.Location = new Point(789, 467);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(306, 160);
+            groupBox5.TabIndex = 26;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "试验结论";
+            // 
+            // txtNGReasonFinalResult
+            // 
+            txtNGReasonFinalResult.BorderStyle = BorderStyle.FixedSingle;
+            txtNGReasonFinalResult.Enabled = false;
+            txtNGReasonFinalResult.Location = new Point(28, 117);
+            txtNGReasonFinalResult.Name = "txtNGReasonFinalResult";
+            txtNGReasonFinalResult.Size = new Size(256, 27);
+            txtNGReasonFinalResult.TabIndex = 2;
+            txtNGReasonFinalResult.Leave += txtNGReasonFinalResult_Leave;
+            // 
+            // rdoNGFinalResult
+            // 
+            rdoNGFinalResult.AutoSize = true;
+            rdoNGFinalResult.Location = new Point(28, 80);
+            rdoNGFinalResult.Name = "rdoNGFinalResult";
+            rdoNGFinalResult.Size = new Size(113, 24);
+            rdoNGFinalResult.TabIndex = 1;
+            rdoNGFinalResult.Text = "不符合要求 :";
+            rdoNGFinalResult.UseVisualStyleBackColor = true;
+            rdoNGFinalResult.CheckedChanged += rdoNGFinalResult_CheckedChanged;
+            // 
+            // rdoOKFinalResult
+            // 
+            rdoOKFinalResult.AutoSize = true;
+            rdoOKFinalResult.Location = new Point(28, 37);
+            rdoOKFinalResult.Name = "rdoOKFinalResult";
+            rdoOKFinalResult.Size = new Size(90, 24);
+            rdoOKFinalResult.TabIndex = 0;
+            rdoOKFinalResult.Text = "符合要求";
+            rdoOKFinalResult.UseVisualStyleBackColor = true;
+            rdoOKFinalResult.CheckedChanged += rdoOKFinalResult_CheckedChanged;
+            // 
             // TestForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1001, 548);
+            ClientSize = new Size(1287, 645);
+            Controls.Add(groupBox5);
             Controls.Add(btnStopHeat);
             Controls.Add(btnStartHeat);
             Controls.Add(groupBox4);
+            Controls.Add(txtNGReason3);
             Controls.Add(groupBox3);
+            Controls.Add(txtNGReason2);
             Controls.Add(btnCloseWindow);
+            Controls.Add(txtNGReason1);
             Controls.Add(btnGenerateReport);
             Controls.Add(btnCloseValve);
             Controls.Add(btnOpenValve);
@@ -543,6 +632,7 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4);
             MaximizeBox = false;
             Name = "TestForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -565,7 +655,10 @@
             groupBox3.PerformLayout();
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -608,5 +701,9 @@
         private Label label2;
         private Button btnStartHeat;
         private Button btnStopHeat;
+        private GroupBox groupBox5;
+        private TextBox txtNGReasonFinalResult;
+        private RadioButton rdoNGFinalResult;
+        private RadioButton rdoOKFinalResult;
     }
 }

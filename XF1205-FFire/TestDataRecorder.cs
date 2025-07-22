@@ -4,6 +4,7 @@ using OfficeOpenXml;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraRichEdit.API.Native;
 using MSExcel = Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
 
 namespace XF1205_FFire
 {
@@ -108,6 +109,7 @@ namespace XF1205_FFire
             }
 
             /* 创建本地存储目录 */
+            //string prodpath = $"E:\\灭火毯项目报表部署文件\\XF 1205-2014 FFire\\{_dataModel.SampleId}";
             string prodpath = $"D:\\XF 1205-2014 FFire\\{_dataModel.SampleId}";
             string smppath = $"{prodpath}\\{_dataModel.TestId}";
             string datapath = $"{smppath}\\data";
@@ -142,7 +144,9 @@ namespace XF1205_FFire
                     EOL = "\r"    // 修改行尾结束符,默认为 "\r\n" ("\r"为回车符 "\n"为换行符);
                                   // 字符类型引用符 format.TextQualifier = '"';
                 };
-                using (ExcelPackage excelPack = new ExcelPackage(new FileInfo(@"D:\\XF 1205-2014 FFire\\chart_template.xlsx")))
+
+                //using (ExcelPackage excelPack = new ExcelPackage(new FileInfo(@"E:\\灭火毯项目报表部署文件\\XF 1205-2014 FFire\\chart_template.xlsx")))
+                using (ExcelPackage excelPack = new ExcelPackage(new FileInfo(@"D:\\XF 1205-2014 FFire\\chart_template.xlsx"))) 
                 {
                     // 加载传感器温度原始数据
                     excelPack.Workbook.Worksheets[0].Cells["A1"].LoadFromText(new FileInfo($"{datapath}\\sensordata.csv"), format,
@@ -161,17 +165,22 @@ namespace XF1205_FFire
                 oApp.DisplayAlerts = false;
                 oWorkbook = oApp.Workbooks.OpenXML($"{datapath}\\chart.xlsx");
                 oWorksheet = oWorkbook.Worksheets.Item[1];
+
                 // 将图表对象复制到系统剪贴板
                 oWorksheet.Shapes.Item(1).Copy();
 
                 oWorkbook.Close(false);
                 oApp.Quit();
+                // 释放COM对象
+                Marshal.ReleaseComObject(oWorksheet);
+                Marshal.ReleaseComObject(oWorkbook);
+                Marshal.ReleaseComObject(oApp);
 
                 // 使用 DevExpress Office API 填写Word格式的试验报表
                 using (var wordProcessor = new RichEditDocumentServer())
                 {
-                    wordProcessor.LoadDocument(@"D:\\XF 1205-2014 FFire\\template.docx");
-
+                    //wordProcessor.LoadDocument(@"E:\\灭火毯项目报表部署文件\\XF 1205-2014 FFire\\template.docx");
+                    wordProcessor.LoadDocument(@"D:\\XF 1205-2014 FFire\\template.docx");                    
                     Document document = wordProcessor.Document;
                     // 设置Word格式试验报表的表格数据
                     /* 填充非表格化数据 */
@@ -200,18 +209,32 @@ namespace XF1205_FFire
                     // 设备编号
                     document.Replace(document.FindAll("[apparatusid]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.ApparatusId);
                     // 试验结论1
-                    document.Replace(document.FindAll("[result1]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result1 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason1 + ",不符合要求");
+                    document.Replace(document.FindAll("[result1]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result1 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason1 + "不符合要求");
                     // 试验结论2
-                    document.Replace(document.FindAll("[result2]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result2 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason2 + ",不符合要求");
+                    document.Replace(document.FindAll("[result2]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result2 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason2 + "不符合要求");
                     // 试验结论3
-                    document.Replace(document.FindAll("[result3]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result3 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason3 + ",不符合要求");
+                    document.Replace(document.FindAll("[result3]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Result3 ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + _dataModel.NGReason3 + "不符合要求");
+                    // 最终试验结论
+                    document.Replace(document.FindAll("[finalresult]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.FinalResult ? "■ 符合要求 \r□ 不符合要求" : "□ 符合要求 \r■ " + "不符合要求: " + _dataModel.NGFinalReason);
+                    // 试验地点
+                    if (_dataModel.TestAddressOption == "1")
+                    {
+                        document.Replace(document.FindAll("[option1]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], "☑ ");
+                        document.Replace(document.FindAll("[option2]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], "□ ");
+                    }                        
+                    else if (_dataModel.TestAddressOption == "2")
+                    {
+                        document.Replace(document.FindAll("[option1]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], "□ ");
+                        document.Replace(document.FindAll("[option2]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], "☑ ");
+                    }
+                    document.Replace(document.FindAll("[address2]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0],_dataModel.OtherTestAddress);
                     // 试验备注
-                    document.Replace(document.FindAll("[memo]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Memo);
+                    //document.Replace(document.FindAll("[memo]", DevExpress.XtraRichEdit.API.Native.SearchOptions.WholeWord)[0], _dataModel.Memo);
 
                     // 在表格中插入温度曲线图
                     DevExpress.XtraRichEdit.API.Native.Table table = document.Tables[0];
                     table.BeginUpdate();
-                    document.Images.Insert(table[10, 0].Range.Start, Clipboard.GetImage());
+                    document.Images.Insert(table[11, 0].Range.Start, Clipboard.GetImage());
                     table.EndUpdate();
 
                     Clipboard.Clear();
@@ -228,6 +251,10 @@ namespace XF1205_FFire
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "系统异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                progress.Invoke(new Action(() =>
+                {
+                    progress.Close();
+                }));
             }
 
             // 重置试验控制变量
