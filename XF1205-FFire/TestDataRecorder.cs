@@ -94,7 +94,7 @@ namespace XF1205_FFire
         }
 
         public void OutputTestData()
-        {
+        {      
             progress.Show();
             progress.Invoke(new Action(() =>
             {
@@ -159,7 +159,6 @@ namespace XF1205_FFire
                 MSExcel.Application oApp;
                 MSExcel.Workbook oWorkbook;
                 MSExcel.Worksheet oWorksheet;
-
                 oApp = new MSExcel.Application();
                 oApp.Visible = false;
                 oApp.DisplayAlerts = false;
@@ -168,9 +167,9 @@ namespace XF1205_FFire
 
                 // 将图表对象复制到系统剪贴板
                 oWorksheet.Shapes.Item(1).Copy();
-
                 oWorkbook.Close(false);
                 oApp.Quit();
+
                 // 释放COM对象
                 Marshal.ReleaseComObject(oWorksheet);
                 Marshal.ReleaseComObject(oWorkbook);
@@ -240,21 +239,19 @@ namespace XF1205_FFire
                     Clipboard.Clear();
                     wordProcessor.SaveDocument($"{rptpath}\\report.docx", DevExpress.XtraRichEdit.DocumentFormat.OpenXml);
                 }
-
-                progress.Invoke(new Action(() =>
-                {
-                    progress.Close();
-                }));
-
                 MessageBox.Show("生成报告成功!", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "系统异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+            }
+            finally
+            {
                 progress.Invoke(new Action(() =>
                 {
                     progress.Close();
-                }));
+                }));                
             }
 
             // 重置试验控制变量

@@ -188,7 +188,7 @@
             // rdoNG3
             // 
             rdoNG3.AutoSize = true;
-            rdoNG3.Location = new Point(116, 7);
+            rdoNG3.Location = new Point(115, 7);
             rdoNG3.Margin = new Padding(4);
             rdoNG3.Name = "rdoNG3";
             rdoNG3.Size = new Size(105, 24);
